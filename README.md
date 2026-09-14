@@ -75,7 +75,7 @@ The 47 Chinese networks, including Hong Kong and Macau, were compiled from the A
 service, with in-vehicle times read from first- and last-train progressions and frequencies
 transcribed from the interval statements operators publish. The Korean networks come from the
 national GTFS release of the Korea Transport Database, the Japanese networks from the operators'
-GTFS feeds or published timetables, the Taiwanese networks from the Transport Data eXchange, and
+GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and
 Kobe's station set from Vijlbrief et al. (2022). `SOURCES.md` names every source with its licence.
 The transcribed interval statements, the annotated networks with full provenance blocks, and the
 code that builds everything are in the companion repository

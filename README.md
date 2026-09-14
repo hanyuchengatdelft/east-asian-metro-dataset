@@ -1,4 +1,4 @@
-# East Asian metro dataset
+# East Asian metro dataset / 东亚地铁数据库 / 東亞地鐵數據庫 / 東アジアの地下鉄データセット / 동아시아 지하철 데이터셋
 
 Sixty-two metro networks of East Asia in two graph spaces, with the line-level inclusion rule that decided what each network contains. This is the dataset of record for the manuscript *Accessibility Analysis of East Asian Metro Systems* (Hanyu Cheng, Rajat Verma, Oded Cats, Delft University of Technology, Transport and Planning).
 The networks cover major networks in East Asia, precisely, 45 cities in P.R China (including Hong Kong and Macau), 7 cities in Japan, 4 in South Korea and 4 in Chinese Taipei.  The version 2 lineage, which the manuscript reports, holds 7,428 stations. Every file in this repository is listed with its SHA-256 in `MANIFEST.csv`.

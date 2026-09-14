@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+title: >-
+  East Asian metro dataset: 62 networks in L-space and P-space with a
+  line-level inclusion register, frozen 12 September 2026
+message: If you use this dataset, please cite both the dataset and the paper.
+type: dataset
+authors:
+  - given-names: Hanyu
+    family-names: Cheng
+    affiliation: Delft University of Technology
+  - given-names: Rajat
+    family-names: Verma
+    affiliation: Delft University of Technology
+  - given-names: Oded
+    family-names: Cats
+    affiliation: Delft University of Technology
+    orcid: 'https://orcid.org/0000-0002-4506-0459'
+version: '2026-09-12'
+date-released: '2026-09-14'
+repository-code: 'https://github.com/hanyuchengatdelft/east-asian-metro-dataset'
+license: CC-BY-4.0
+keywords:
+  - public transport
+  - metro
+  - accessibility
+  - network science
+  - East Asia
+references:
+  - type: article
+    title: Accessibility Analysis of East Asian Metro Systems
+    authors:
+      - given-names: Hanyu
+        family-names: Cheng
+      - given-names: Rajat
+        family-names: Verma
+      - given-names: Oded
+        family-names: Cats
+    status: submitted

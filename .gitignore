@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db
+# never commit credentials or raw provider responses
+*Key.txt
+*key.txt
+raw/
+*.zip

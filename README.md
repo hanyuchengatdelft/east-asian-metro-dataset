@@ -1,19 +1,11 @@
 # East Asian metro dataset
 
-Sixty-two metro networks of East Asia in two graph spaces, with the line-level register that
-decided what each network contains. This is the dataset of record for the manuscript
-*Accessibility Analysis of East Asian Metro Systems* (Hanyu Cheng, Rajat Verma, Oded Cats,
-Delft University of Technology, Transport and Planning), frozen on 12 September 2026.
-
-The networks cover 45 cities in mainland China, Hong Kong, Macau, seven cities in Japan, four in
-South Korea and four in Taiwan. The version 2 lineage, which the manuscript reports, holds
-7,428 stations. Every file in this repository is listed with its SHA-256 in `MANIFEST.csv`.
+Sixty-two metro networks of East Asia in two graph spaces, with the line-level inclusion rule that decided what each network contains. This is the dataset of record for the manuscript *Accessibility Analysis of East Asian Metro Systems* (Hanyu Cheng, Rajat Verma, Oded Cats, Delft University of Technology, Transport and Planning).
+The networks cover major networks in East Asia, precisely, 45 cities in P.R China (including Hong Kong and Macau), 7 cities in Japan, 4 in South Korea and 4 in Chinese Taipei.  The version 2 lineage, which the manuscript reports, holds 7,428 stations. Every file in this repository is listed with its SHA-256 in `MANIFEST.csv`.
 
 ## Reference state
 
-Network extent and station sets are those in operation on 24 September 2025. Service statements
-were admitted only where published on or before 30 September 2025. The dataset is a repair of that
-2025 snapshot, not a refresh to a later date.
+Network extent and station sets are those in operation on 24 September 2025. Service statements were admitted only where published on or before 30 September 2025. The dataset is a repair of that 2025 snapshot, not a refresh to a later date.
 
 ## What is here
 

@@ -7,7 +7,7 @@ The networks cover major networks in East Asia, precisely, 45 cities in mainland
 
 Network extent and station sets are those in operation on 24 September 2025. Service statements were admitted only where published on or before 30 September 2025. The dataset is a repair of that 2025 snapshot, not a refresh to a later date.
 
-## What is here
+## the metadata
 
 | Path | Content |
 |---|---|

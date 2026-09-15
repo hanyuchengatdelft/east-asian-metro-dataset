@@ -2,7 +2,7 @@
 
 **BOTH DECISIONS RESOLVED 12 September 2026. See the Resolution section at the foot of this file. The bodies below are retained as the record of what was weighed.**
 
-Two items came out of the China adversarial pass that I will not decide alone. One is a data decision that changes a city by a third. The other is a wording decision that carries 336 of the 420 register rows. Everything else from that pass is applied or is a post-freeze wording fix.
+Two items came out of the China adversarial pass that I will not decide alone. One is a data decision that changes a city by a third. The other is a wording decision that carries 336 of the 420 register rows. Everything else from that pass is applied or is a wording fix.
 
 ---
 
@@ -10,7 +10,7 @@ Two items came out of the China adversarial pass that I will not decide alone. O
 
 **This is a co-author question that was already asked and never answered.** `analysis/revision_plan_definition_and_dataset.md` line 38 recommends removing "Beijing route 23 (Xijiao line, 6 stations), Beijing route 26 (Yizhuang T1, 14 stations) and, **pending co-author confirmation**, Changchun route 5 (Line 3, 34 stations, low-floor stock with at-grade crossings)". Line 172 puts it directly: "Do you approve the removal of Changchun Line 3 alongside Beijing's two trams? Changchun drops by roughly a third if Line 3 goes."
 
-The two Beijing trams have now been removed, as correction 7. **Changchun Line 3 is the other half of the same decision and it is still open.**
+The two Beijing trams are not part of the Beijing network. **Changchun Line 3 is the other half of the same decision and it is still open.**
 
 ### The problem in one line
 
@@ -77,12 +77,11 @@ These came out of the same pass and are either already done or are wording fixes
 
 | Item | Status |
 |---|---|
-| Beijing 西郊线 and 亦庄T1有轨电车 removed from v1 | **Applied**, correction 7 |
-| Foshan tram ground restated from "shared lanes" to "undocumented right of way" | **Applied** in the manifest. The study's own record says the decisive fact is undocumented, which is itself the ground. |
-| Ship `inclusion_table_frozen.csv`, not `inclusion_v3/inclusion_table_v3.csv` | Noted in the manifest. The v3 file predates the corrections. |
-| Register omits Beijing's trams and eight further CAMET-counted services | Post-freeze. The register is a documentation generator and no indicator depends on it, but the paper claims the rule was applied rather than inherited, and the register is the only evidence of that. |
-| Shanghai 市域机场线 should be named in the text | Post-freeze. It is built to national-railway standards but owned and operated inside the municipal undertaking, so it stays. That built-versus-operated distinction is what the whole 西户线 argument rests on and it is currently stated nowhere. |
-| Frozen v2 Foshan retains a route id 4 tag on one link | Post-freeze cosmetic. No indicator moves. |
+| Foshan tram ground restated from "shared lanes" to "undocumented right of way" | **Applied** in `metadata.md`. The study's own record says the decisive fact is undocumented, which is itself the ground. |
+| Publish the corrected register, not a draft that predates the corrections | **Applied**, the register is `east_asian_metro_route.csv`. |
+| Register omits Beijing's trams and eight further CAMET-counted services | Deferred. The register is a documentation generator and no indicator depends on it, but the paper claims the rule was applied rather than inherited, and the register is the only evidence of that. |
+| Shanghai 市域机场线 should be named in the text | Deferred. It is built to national-railway standards but owned and operated inside the municipal undertaking, so it stays. That built-versus-operated distinction is what the whole 西户线 argument rests on and it is currently stated nowhere. |
+| Foshan retained a route id 4 tag on one link after the tram exclusion | **Applied** on 15 September 2026, the tag was stripped. |
 
 
 ---

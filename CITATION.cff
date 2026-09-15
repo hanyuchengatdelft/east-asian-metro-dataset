@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: >-
   East Asian metro dataset: 62 networks in L-space and P-space with a
-  line-level inclusion register, frozen 12 September 2026
+  line-level inclusion register
 message: If you use this dataset, please cite both the dataset and the paper.
 type: dataset
 authors:
@@ -15,8 +15,8 @@ authors:
     family-names: Cats
     affiliation: Delft University of Technology
     orcid: 'https://orcid.org/0000-0002-4506-0459'
-version: '2026-09-12'
-date-released: '2026-09-14'
+version: '2026-09-15'
+date-released: '2026-09-15'
 repository-code: 'https://github.com/hanyuchengatdelft/east-asian-metro-dataset'
 license: CC-BY-4.0
 keywords:

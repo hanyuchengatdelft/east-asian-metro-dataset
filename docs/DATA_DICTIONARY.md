@@ -1,6 +1,6 @@
 # Data dictionary, `asia/L2_v2_annotated` and `asia/P2_v2_annotated`
 
-Generated 2026-08-22 v2 by `dataset_v2/annotate.py` on the repaired files `asia/L2_v2` and `asia/P2_v2`, built by `dataset_v2/repair.py`. Node and link values differ from the submitted state wherever a repair applies. Every change is listed per city and operation in `dataset_v2/build/changelog_v2.csv` (Supplementary Table S4) and inside each file under `graph.repairs`, and changed nodes and links keep `v1_id`, `v1_lat`, `v1_lon` or `v1_duration_avg` next to the new value. The originals in `asia/L2` and `asia/P2` are the frozen submitted state.
+Generated 2026-08-22 v2 by `dataset_v2/annotate.py` on the repaired files `asia/L2_v2` and `asia/P2_v2`, built by `dataset_v2/repair.py`. Node and link values differ from the submitted state wherever a repair applies. Every change is listed per city and operation in `dataset_v2/build/changelog_v2.csv` (Supplementary Table S4) and inside each file under `graph.repairs`, and changed nodes and links keep `v1_id`, `v1_lat`, `v1_lon` or `v1_duration_avg` next to the new value.
 
 ## Graph-level fields (`graph`)
 

@@ -18,7 +18,7 @@ URL and date in the corresponding table.
 
 ## Service attributes
 
-| Source | Covers | Licence | Published here |
+| Source | Covers | Licence | Link |
 |---|---|---|---|
 | Operator interval notices, published timetables and government relays | Chinese line frequencies | quoted with URL and date under fair citation | the transcriptions, in `data/bands` |
 | Amap bus-line interval bands | secondary Chinese frequencies | provider terms | the derived bands only |

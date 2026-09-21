@@ -24,7 +24,7 @@ URL and date in the corresponding table.
 | Amap bus-line interval bands | secondary Chinese frequencies | provider terms | the derived bands only |
 | China Association of Metros, annual statistical report 2025 | calibration of 45 mainland networks | association publication, cited | no |
 
-How every frequency is sourced, network by network and route by route, with the URL and date of each statement and the check against the association's minimum peak headway and planned daily runs, is in `docs/FREQUENCY_SOURCES.md`, with the per-route table `docs/frequency_sources_by_route.csv`.
+How every frequency is sourced, network by network and route by route, with the URL and date of each statement and the check against the association's minimum peak headway and planned daily runs, is in `frequency_sources.md`, with the per-route table `../data/route_frequency_sources.csv`.
 | Public Transportation Open Data Center (公共交通オープンデータセンター) | verification of Tokyo and Yokohama | 公共交通オープンデータ基本ライセンス (Tokyo Metro, Yokohama Municipal, Yurikamome), CC BY 4.0 (Toei) | no raw data, only the aggregated comparison tables in `data/verification` |
 
 Japanese attribution, required when this dataset's Japanese networks or the verification tables are used:

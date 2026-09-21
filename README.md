@@ -4,10 +4,10 @@ Sixty-two metro networks of East Asia in two graph spaces, with the line-level i
 
 The two representations are L-space, in which a link joins consecutive stations along a line, and P-space, in which a link joins every pair of stations reachable without a transfer (von Ferber et al., 2009). L-space carries the in-vehicle times and P-space the service frequencies and waiting times, so together they hold the infrastructure and the service dimension of each network.
 
-The dataset covers networks in 45 mainland Chinese cities and in Hong Kong and Macau, along with seven networks in Japan, four in South Korea and four in Taiwan. It contains 7,419 stations and 417 route records. data_sources.md lists all sources and their licences and rebuild instructions.
+The dataset covers networks in 45 mainland Chinese cities and in Hong Kong and Macau, along with seven networks in Japan, four in South Korea and four in Taiwan. It contains 7,419 stations and 417 route records. docs/data_sources.md lists all sources and their licences and rebuild instructions.
 
 ## Reference dates
-Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/FREQUENCY_SOURCES.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
+Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/frequency_sources.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
 
 ## Scale
 |                |                      Stations |                            Route records |
@@ -19,19 +19,19 @@ Network extent and station sets reflect the networks in operation on 24 Septembe
 | Largest        |                414 (Shanghai) |                             28 (Beijing) |
 
   
-## the metadata
+## What is in the repository
 
 | Path | Content |
 |---|---|
-| `l-space_representation/` | **The 62 networks in L-space, 7,419 stations.** Stations as nodes, in-vehicle links as directed edges. In-vehicle times and frequencies rebuilt from operator timetables and published interval statements, with the corrections listed in `metadata.md` applied. This is what the manuscript reports. |
-| `p-space_representation/` | The same 62 networks in P-space: one edge for every origin and destination joined by a service without a transfer, carrying the frequency, the waiting time and its source. |
-| `east_asian_metro_route.csv` | **The line-level inclusion register**, 420 rows, one per route record. For every line: city, local and English name, operator, technology, legal class, mode, station count, great-circle length, commercial speed proxy, trains per hour, headway and its source, the share of the service day filled rather than published, the outcome of the three tests (`T1_uitp_line_criteria`, `T2_designated_urban_system`, `T3_scope` with `T3_basis`), the fare flag and the verdict. 418 rows are included, 2 are excluded. |
-| `metadata.md` | The record of the published files: the reference dates, the totals, every correction with its grounds and its effect on the station counts, and the provenance of the corrected values. |
-| `OPEN_DECISIONS.md` | Two inclusion decisions (Changchun Line 3, the Chinese membership test) and how they were resolved. |
-| `docs/INCLUSION_RULE.md` | The full statement of the inclusion rule, with the instrument used in each jurisdiction and the counts it produces. |
-| `docs/FREQUENCY_SOURCES.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report. `docs/frequency_sources_by_route.csv` is the per-route table behind it. |
-| `docs/DATA_DICTIONARY.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
-| `data_sources.md` | Every source behind the files, its licence, and the attribution it requires. |
+| `data/l-space/` | **The 62 networks in L-space, 7,419 stations.** Stations as nodes, in-vehicle links as directed edges. In-vehicle times and frequencies rebuilt from operator timetables and published interval statements, with the corrections listed in `docs/dataset_record.md` applied. This is what the manuscript reports. |
+| `data/p-space/` | The same 62 networks in P-space: one edge for every origin and destination joined by a service without a transfer, carrying the frequency, the waiting time and its source. |
+| `data/route_register.csv` | **The line-level inclusion register**, 420 rows, one per route record. For every line: city, local and English name, operator, technology, legal class, mode, station count, great-circle length, commercial speed proxy, trains per hour, headway and its source, the share of the service day filled rather than published, the outcome of the three tests (`T1_uitp_line_criteria`, `T2_designated_urban_system`, `T3_scope` with `T3_basis`), the fare flag and the verdict. 418 rows are included and 2 are excluded. |
+| `data/route_frequency_sources.csv` | The per-route table behind the frequencies: for every route, each band id, URL and date the value was read from. It holds 417 rows, the register's 420 less the 2 excluded lines and the 1 included line that is not represented in the network files. |
+| `docs/dataset_record.md` | The record of the published files: the reference dates, the totals, every correction with its grounds and its effect on the station counts, and the provenance of the corrected values. |
+| `docs/data_sources.md` | Every source behind the files, its licence, and the attribution it requires. |
+| `docs/inclusion_rule.md` | The full statement of the inclusion rule, with the instrument used in each jurisdiction and the counts it produces. |
+| `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report. |
+| `docs/data_dictionary.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
 
 ## The inclusion criteria in one paragraph
 
@@ -43,7 +43,7 @@ transit system that the city's own jurisdiction designates, so suburban and comm
 excluded as systems and through-running services are truncated at the system boundary. T3 records
 whether a line is urban or metropolitan in scope. Metropolitan lines stay in the main sample and are
 removed in a sensitivity sample. The register gives the result of each test for every line, and
-`docs/INCLUSION_RULE.md` states the rule in full.
+`docs/inclusion_rule.md` states the rule in full.
 
 ## Reading a network
 
@@ -52,7 +52,7 @@ Files are NetworkX node-link JSON, one per city, UTF-8, city names as in the fil
 
 ```python
 import json, networkx as nx
-G = nx.node_link_graph(json.load(open("l-space_representation/Tokyo-L.json", encoding="utf-8")))
+G = nx.node_link_graph(json.load(open("data/l-space/Tokyo-L.json", encoding="utf-8")))
 ```
 
 L-space: stations as nodes, in-vehicle links as directed edges with `duration_avg` in seconds.
@@ -69,18 +69,18 @@ end. A frequency is the number of weekday services between 05:00 and 24:00 divid
 hours, and the waiting time is half the resulting headway. Coordinates are WGS-84 throughout.
 
 ## Data sources
-The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al. (2022). `data_sources.md` names every source with its licence, and `docs/FREQUENCY_SOURCES.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
+The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al. (2022). `docs/data_sources.md` names every source with its licence, and `docs/frequency_sources.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
 
 ## Every network is a single component
 
 Since the corrections of 15 September 2026 every published network is one connected component. The
 nine-station northern section of Foshan Line 3, not physically joined to the rest of the network at
 the reference date, is not represented in the files, and the register says so on its row. The
-grounds are recorded in `metadata.md`.
+grounds are recorded in `docs/dataset_record.md`.
 
 ## Licence and citation
 
-Data and documentation are released under Creative Commons Attribution 4.0 International, see `LICENSE`. Cite the dataset as set out in `CITATION.cff` and the paper for the analysis. Attribution requirements inherited from individual sources are listed in `data_sources.md` and must be carried over. In particular, work that uses the Tokyo or Yokohama networks must reproduce the attribution sentence of the Public Transportation Open Data Center given there.
+Data and documentation are released under Creative Commons Attribution 4.0 International, see `LICENSE`. Cite the dataset as set out in `CITATION.cff` and the paper for the analysis. Attribution requirements inherited from individual sources are listed in `docs/data_sources.md` and must be carried over. In particular, work that uses the Tokyo or Yokohama networks must reproduce the attribution sentence of the Public Transportation Open Data Center given there.
 
 ## References
 China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml

@@ -1,6 +1,6 @@
 # Frequency and headway sources, network by network
 
-Generated 2026-09-15 by `dataset_v2/make_frequency_sources.py` from the transcribed statements in `dataset_v2/headways/bands/`, the converter reports in `dataset_v2/build/headways_by_segment/`, the route register `supplementary_line_inventory_v2.csv` and the P files of the published dataset of 15 September 2026. The companion table `frequency_sources_by_route.csv` carries, for every route, every band id, URL and date behind its frequency. Nothing in this file is typed by hand: rerun the script after any change to the band files or the converter output.
+Generated on 15 September 2026 from the transcribed interval statements, the converter reports and the route register, against the P files of the published dataset. The companion table `../data/route_frequency_sources.csv` carries, for every route, every band id, URL and date behind its frequency. Nothing in this file is typed by hand, it is rebuilt by the script in the companion repository after any change to the band files or the converter output.
 
 ## 1. How to read this file
 

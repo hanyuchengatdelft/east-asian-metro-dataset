@@ -44,7 +44,7 @@ Incheon is unchanged at 68 stations and retains the Line 7 section. Guangzhou re
 
 The register records 30 included routes in 15 cities as metropolitan in scope (`T3_scope`). They stay in the networks and are removed in the urban-scope sensitivity sample, which keeps 58 networks, because Jinhua, Taizhou, Taoyuan and Wenzhou have no urban-scope route.
 
-## Register corrections in `east_asian_metro_route.csv`
+## Register corrections in `../data/route_register.csv`
 
 - Daegu route 1: 35 → 32 stations, T2 recorded as failing on the 안심~하양 section.
 - Xi'an route 17: verdict changed to exclude.

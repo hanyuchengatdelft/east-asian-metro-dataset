@@ -1,7 +1,7 @@
 # East Asian metro dataset / 东亚地铁数据库 / 東亞地鐵數據庫 / 東アジアの地下鉄データセット / 동아시아 지하철 데이터셋
 
 Sixty-two metro networks of East Asia in two graph spaces, with the line-level inclusion rule that decided what each network contains. This is the dataset of record for the manuscript *Accessibility Analysis of East Asian Metro Systems* (Hanyu Cheng, Rajat Verma, Oded Cats, Delft University of Technology, Transport and Planning).
-The networks cover the major networks of East Asia: 47 Chinese networks (45 cities in mainland China plus Hong Kong and Macau), 7 in Japan, 4 in South Korea and 4 in Chinese Taipei. It holds 7,419 stations. The repository holds the dataset and its data sources and nothing else: the code that builds it lives in the companion repository named below.
+The networks cover the major networks of East Asia: 47 mailand Chinese networks (45 cities in mainland China plus Hong Kong and Macau), 7 in Japan, 4 in South Korea and 4 in Chinese Taipei. It holds 7,419 stations. The repository holds the dataset and its data sources and nothing else: the code that builds it lives in the companion repository named below.
 
 ## Version
 
@@ -10,6 +10,16 @@ The files are the version of 15 September 2026. `metadata.md` lists every correc
 ## Reference state
 
 Network extent and station sets are those in operation on 24 September 2025. Service statements were admitted only where published on or before 30 September 2025. The dataset is a repair of that 2025 snapshot, not a refresh to a later date.
+
+Scale
+|                |                      Stations |                            Route records |
+|----------------|-------------------------------|------------------------------------------|
+| Total          |                         7,419 |                                      417 |
+| Median network |                            90 |                                        4 |
+| Quartiles      |                    38 and 188 |                                 2 and 10 |
+| Smallest       | 15 (Dongguan, Macau, Taizhou) | 1 (Dongguan, Taichung, Taizhou, Taoyuan) |
+| Largest        |                414 (Shanghai) |                             28 (Beijing) |
+  
 
 ## the metadata
 

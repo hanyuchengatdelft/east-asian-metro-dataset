@@ -4,17 +4,12 @@ Sixty-two metro networks of East Asia in two graph spaces, with the line-level i
 
 The two representations are L-space, in which a link joins consecutive stations along a line, and P-space, in which a link joins every pair of stations reachable without a transfer (von Ferber et al., 2009). L-space carries the in-vehicle times and P-space the service frequencies and waiting times, so together they hold the infrastructure and the service dimension of each network.
 
-The coverage is 45 cities in mainland China, Hong Kong, Macau, 7 networks in Japan, 4 in South Korea and 4 in Taiwan, holding 7,419 stations on 417 route records. `data_sources.md` names every source with its licence and points to the rebuild instructions.
+The dataset covers networks in 45 mainland Chinese cities and in Hong Kong and Macau, along with seven networks in Japan, four in South Korea and four in Taiwan. It contains 7,419 stations and 417 route records. data_sources.md lists all sources and their licences and rebuild instructions.
 
-## Version
+## Reference dates
+Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/FREQUENCY_SOURCES.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
 
-The files are the version of 15 September 2026. `metadata.md` lists every correction applied to them with its grounds, and gives the totals: 62 networks, 7,419 stations, each network a single connected component.
-
-## Reference state
-
-Network extent and station sets are those in operation on 24 September 2025. Service statements were admitted only where published on or before 30 September 2025. The dataset is a repair of that 2025 snapshot, not a refresh to a later date.
-
-Scale
+## Scale
 |                |                      Stations |                            Route records |
 |----------------|-------------------------------|------------------------------------------|
 | Total          |                         7,419 |                                      417 |
@@ -22,8 +17,8 @@ Scale
 | Quartiles      |                    38 and 188 |                                 2 and 10 |
 | Smallest       | 15 (Dongguan, Macau, Taizhou) | 1 (Dongguan, Taichung, Taizhou, Taoyuan) |
 | Largest        |                414 (Shanghai) |                             28 (Beijing) |
-  
 
+  
 ## the metadata
 
 | Path | Content |
@@ -73,17 +68,8 @@ An in-vehicle link time is measured departure to departure, so it includes the d
 end. A frequency is the number of weekday services between 05:00 and 24:00 divided by nineteen
 hours, and the waiting time is half the resulting headway. Coordinates are WGS-84 throughout.
 
-## Where the data come from
-
-The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway
-service, with in-vehicle times read from first- and last-train progressions and frequencies
-transcribed from the interval statements operators publish. The Korean networks come from the
-national GTFS release of the Korea Transport Database, the Japanese networks from the operators'
-GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and
-Kobe's station set from Vijlbrief et al. (2022). `data_sources.md` names every source with its licence, and `docs/FREQUENCY_SOURCES.md` traces every frequency to the statement, feed or table it was read from.
-The transcribed interval statements, the annotated networks with full provenance blocks, and the
-code that builds everything are in the companion repository
-`https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
+## Data sources
+The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al. (2022). `data_sources.md` names every source with its licence, and `docs/FREQUENCY_SOURCES.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
 
 ## Every network is a single component
 

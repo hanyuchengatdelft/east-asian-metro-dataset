@@ -2,7 +2,9 @@
 
 Sixty-two metro networks of East Asia in two graph spaces, with the line-level inclusion rule that decided what each network contains. This is the dataset of record for the manuscript *Accessibility Analysis of East Asian Metro Systems* (Hanyu Cheng, Rajat Verma, Oded Cats, Delft University of Technology, Transport and Planning department).
 
-The coverage is 45 cities in mainland China, Hong Kong, Macau, 7 networks in Japan, 4 in South Korea and 4 in Taiwan, holding 7,419 stations on 417 route records. The networks run from single-line systems of 15 stations to Shanghai with 414 stations on 23 lines and Beijing with 399 on 28, and the median network has 90 stations on 4 lines.  `data_sources.md` names every source with its licence and points to the rebuild instructions.
+The two representations are L-space, in which a link joins consecutive stations along a line, and P-space, in which a link joins every pair of stations reachable without a transfer (von Ferber et al., 2009). L-space carries the in-vehicle times and P-space the service frequencies and waiting times, so together they hold the infrastructure and the service dimension of each network.
+
+The coverage is 45 cities in mainland China, Hong Kong, Macau, 7 networks in Japan, 4 in South Korea and 4 in Taiwan, holding 7,419 stations on 417 route records. `data_sources.md` names every source with its licence and points to the rebuild instructions.
 
 ## Version
 
@@ -96,6 +98,7 @@ Data and documentation are released under Creative Commons Attribution 4.0 Inter
 
 ## References
 China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml
+
 UITP. (2025). *Global metro figures 2024* (Statistics Brief). International Association of Public Transport. https://www.uitp.org/wp-content/uploads/sites/7/2025/08/20250822_Global-Metro-Figures_Statistics-Brief_WEB.pdf
 
 Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022a). *A curated data set of L-space representations for 51 metro networks worldwide* (Version 1) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316824.v1

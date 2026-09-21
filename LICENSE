@@ -1,19 +1,13 @@
 # Licence for the data and documentation
 
-The data files and documentation in this repository are licensed under the Creative Commons
-Attribution 4.0 International licence (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/.
+The data files and documentation in this repository are licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/.
 
-You may share and adapt the material for any purpose, including commercially, provided you give
-appropriate credit, link to the licence and indicate whether changes were made.
+You may share and adapt the material for any purpose, including commercially, provided you give appropriate credit, link to the licence and indicate whether changes were made.
 
 Attribution for this dataset:
-
 > Cheng, H., Verma, R., Cats, O. Accessibility of East Asian metro systems: networks, service
 > attributes and provenance. Delft University of Technology.
 
-Some sources carry their own attribution requirements, which pass on to anyone who uses the parts of
-this dataset derived from them. They are listed in SOURCES.md. Work that uses the Japanese networks
-or the verification tables must also reproduce the attribution sentence of the Public Transportation
-Open Data Center given there.
+Some sources carry their own attribution requirements, which pass on to anyone who uses the parts of this dataset derived from them. They are listed in SOURCES.md. Work that uses the Japanese networks or the verification tables must also reproduce the attribution sentence of the Public Transportation Open Data Center given there.
 
 The code in `code/` is licensed separately under the MIT licence, see LICENSE-CODE.

@@ -24,8 +24,7 @@ Generated 2026-08-22 v2 by `dataset_v2/annotate.py` on the repaired files `asia/
 | Field | Meaning |
 |---|---|
 | line_local, line_en | line name in the local language and in English |
-| operator | operating undertaking: the registry for the GTFS and TDX cities, dataset_v2/operators.csv for the Amap-built cities (CPTOND-2025 company field, memo 16 section 8, corrected for the multi-operator cities and verified on the operator pages or their secondary sources); blank where no source exists, listed by annotate.py in build/operator_blanks_v2.csv |
-| operator_source | where the operator name comes from (Amap-built cities) |
+| operator | the company or public body running passenger services on the line on 24 September 2025, as distinct from the owner, concessionaire or parent group. Written as English name (local-language name), with two operators separated by "; " and the section each runs given in `note`. Where no official English name was verified, the English is a descriptive translation and `note` says so. Last column of `data/route_information.csv`. Blank for Guiyang S1, where the passenger operator is unresolved |
 | technology | vehicle and guideway technology, one of a short controlled vocabulary |
 | legal_class | the jurisdiction's own class for the line (GB/T 44413-2024 mode, 도시철도, 大眾捷運系統, 鉄道事業法 / 軌道法, MTR franchise, Law 18/2019) |
 | mode | simplified mode class used for the tests |

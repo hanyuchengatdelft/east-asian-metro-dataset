@@ -4,22 +4,22 @@ Generated on 15 September 2026 from the transcribed interval statements, the con
 
 ## 1. How to read this file
 
-Every direct-service pair in the P files carries a `wait_source` label, and every route in the register carries the same label as `headway_source`. The labels mean:
+Every direct-service pair in the P files carries a `wait_source` label, and every route in the register carries the same label as `headway_source` (the P files write it with underscores, for example `inherited_from_trunk`). The labels mean:
 
 | Label | Meaning |
 |---|---|
-| `published_interval_band_line` | operator statement, interval bands for the whole line |
-| `published_interval_band_section` | operator statement, interval bands per section |
-| `published_peak_offpeak_only` | operator statement, peak (and off-peak) values only, remainder filled by the bounded 2025 constant |
-| `published_average_interval` | operator statement, one average interval |
-| `operator_timetable_departures` | departures counted hour by hour on the operator's station timetables |
-| `press_quoted_operator_notice` | press or government relay quoting the operator's notice |
-| `amap_interval_band` | Amap interval bands (undated, passed the acceptance test) |
-| `inherited_from_trunk` | inherited from the trunk route of the same line |
-| `transcription_2025_unsourced` | 2025 constant, no source |
-| `gtfs_weekday_trips` | weekday trips counted in the GTFS feed |
-| `tdx_frequency_bands` | TDX Frequency endpoint bands |
-| `v1_value_kept_feed_incomplete` | 2025 value kept, route incomplete in the feed |
+| `published interval band line` | operator statement, interval bands for the whole line |
+| `published interval band section` | operator statement, interval bands per section |
+| `published peak offpeak only` | operator statement, peak (and off-peak) values only, remainder filled by the bounded 2025 constant |
+| `published average interval` | operator statement, one average interval |
+| `operator timetable departures` | departures counted hour by hour on the operator's station timetables |
+| `press quoted operator notice` | press or government relay quoting the operator's notice |
+| `amap interval band` | Amap interval bands (undated, passed the acceptance test) |
+| `inherited from trunk` | inherited from the trunk route of the same line |
+| `transcription 2025 unsourced` | 2025 constant, no source |
+| `gtfs weekday trips` | weekday trips counted in the GTFS feed |
+| `tdx frequency bands` | TDX Frequency endpoint bands |
+| `v1 value kept feed incomplete` | 2025 value kept, route incomplete in the feed |
 
 For the mainland networks the rules are (a) precedence: the operator's own interval table or timetable, then an operator notice, then a government portal or press article relaying the operator's notice and labelled as such, then Amap interval bands if they pass a five-part acceptance test; (b) admissibility: the newest weekday statement dated on or before 2025-09-30, later notices archived unless they state the value in force before their change, departure counts made after that date admitted at the lowest rank; (c) coverage: minutes of the service day not covered by a published band take the 2025 constant only if it lies between the published peak headway and twice that value, else the longest published off-peak, and the `constant fill` column gives the share of the window filled this way; (d) a published 最小行车间隔 is a minimum, applied to a 60-minute peak core and never read as an all-day mean. The all-day trains per hour of a route is the sum over the 05:00 to 24:00 window divided by 19 hours, and the waiting time of a pair is half the headway of the bottleneck section.
 
@@ -29,32 +29,32 @@ For the mainland networks the rules are (a) precedence: the operator's own inter
 
 | Jurisdiction | Networks | Routes | Basis of the routes | Direct pairs by label |
 |---|---|---|---|---|
-| Mainland China | 45 | 333 | published_peak_offpeak_only 124, press_quoted_operator_notice 58, amap_interval_band 34, published_interval_band_line 32, published_interval_band_section 26, transcription_2025_unsourced 24, operator_timetable_departures 23, inherited_from_trunk 8, published_average_interval 4 | published_peak_offpeak_only 38.4%, press_quoted_operator_notice 15.1%, published_interval_band_section 9.9%, published_interval_band_line 9.5%, transcription_2025_unsourced 8.9%, amap_interval_band 8.2%, operator_timetable_departures 5.7%, inherited_from_trunk 3.9%, published_average_interval 0.4%, transcription_2025_unsourced | published_peak_offpeak_only 0.0% |
-| Hong Kong SAR | 1 | 12 | published_interval_band_line 6, published_interval_band_section 4, published_peak_offpeak_only 2 | published_interval_band_line 69.6%, published_interval_band_section 29.9%, published_peak_offpeak_only 0.4% |
-| Macau SAR | 1 | 3 | published_average_interval 3 | published_average_interval 100.0% |
-| Japan | 7 | 31 | gtfs_weekday_trips 31 | gtfs_weekday_trips 100.0% |
-| South Korea | 4 | 25 | gtfs_weekday_trips 24, v1_value_kept_feed_incomplete 1 | gtfs_weekday_trips 89.5%, v1_value_kept_feed_incomplete 10.5% |
-| Taiwan | 4 | 13 | tdx_frequency_bands 13 | tdx_frequency_bands 100.0% |
+| Mainland China | 45 | 333 | published peak offpeak only 124, press quoted operator notice 58, amap interval band 34, published interval band line 32, published interval band section 26, transcription 2025 unsourced 24, operator timetable departures 23, inherited from trunk 8, published average interval 4 | published peak offpeak only 38.4%, press quoted operator notice 15.1%, published interval band section 9.9%, published interval band line 9.5%, transcription 2025 unsourced 8.9%, amap interval band 8.2%, operator timetable departures 5.7%, inherited from trunk 3.9%, published average interval 0.4%, transcription 2025 unsourced | published peak offpeak only 0.0% |
+| Hong Kong SAR | 1 | 12 | published interval band line 6, published interval band section 4, published peak offpeak only 2 | published interval band line 69.6%, published interval band section 29.9%, published peak offpeak only 0.4% |
+| Macau SAR | 1 | 3 | published average interval 3 | published average interval 100.0% |
+| Japan | 7 | 31 | gtfs weekday trips 31 | gtfs weekday trips 100.0% |
+| South Korea | 4 | 25 | gtfs weekday trips 24, v1 value kept feed incomplete 1 | gtfs weekday trips 89.5%, v1 value kept feed incomplete 10.5% |
+| Taiwan | 4 | 13 | tdx frequency bands 13 | tdx frequency bands 100.0% |
 
 ## 3. Networks built from timetable feeds
 
 | Network | Feed and how the frequency is read | Routes | Pairs by label |
 |---|---|---|---|
-| Tokyo | Tokyo Metro, Toei, Yurikamome and Tokyo Monorail GTFS feeds (ODPT public centre), weekday trips per station pair, a train counts only where it stops (skip-stop rule of 2026-09-06) | 17 | gtfs_weekday_trips 100.0% |
-| Yokohama | 横浜市交通局 GTFS, feed_version 20241227 (valid to 2025-12-31) | 2 | gtfs_weekday_trips 100.0% |
-| Kyoto | 京都市交通局 GTFS, feed_version 20250701 (valid to 2026-03-31) | 2 | gtfs_weekday_trips 100.0% |
-| Sapporo | 札幌市交通局 GTFS version 1.000, calendar 2020 (the 2020 timetable, the only feed the operator publishes) | 3 | gtfs_weekday_trips 100.0% |
-| Sendai | 仙台市交通局 station timetables of the city open-data portal, revision 2023-07-01, converted to GTFS by jp_timetable_to_gtfs.py | 2 | gtfs_weekday_trips 100.0% |
-| Kobe | 神戸市交通局 open-data timetables, 西神・山手線・北神線 revision 2025-03-15 and 海岸線 revision 2022-09-09, converted to GTFS (node set from the 2006 build) | 2 | gtfs_weekday_trips 100.0% |
-| Fukuoka | 福岡市交通局 all-station Excel timetables, revisions 2025-03-15 and 2025-08-02 (Wayback copies of 2025-09-10), converted to GTFS-JP by the GTFS-FukuokaCitySubway tool | 3 | gtfs_weekday_trips 100.0% |
-| Seoul | KTDB national GTFS, March 2023 dataset (2024 release), weekday trips; Line 2 loop (route 2) keeps its 2025 frequency because the feed holds 39 trips per direction | 14 | gtfs_weekday_trips 82.7%, v1_value_kept_feed_incomplete 17.3% |
-| Incheon | KTDB national GTFS, March 2023 dataset; 277 pairs and the 2024 extension station keep 2025 values the feed cannot produce | 3 | gtfs_weekday_trips 90.0%, v1_value_kept_feed_incomplete 10.0% |
-| Busan | KTDB national GTFS, March 2023 dataset; the last 10 Line 2 trips are completed to 양산 (terminus truncation in the feed, corrected 2026-09-15) | 5 | gtfs_weekday_trips 100.0% |
-| Daegu | KTDB national GTFS, March 2023 dataset; 126 eastbound Line 1 trips completed to 안심 (terminus truncation in the feed, corrected 2026-09-15) | 3 | gtfs_weekday_trips 100.0% |
-| Taipei | TDX Rail/Metro v2 Frequency endpoint, TRTC, captured 2026-08-24, raw responses archived with SHA-256 | 9 | tdx_frequency_bands 100.0% |
-| Taoyuan | TDX Rail/Metro v2 Frequency endpoint, TYMC, captured 2026-08-24 | 1 | tdx_frequency_bands 100.0% |
-| Taichung | TDX Rail/Metro v2 Frequency endpoint, TMRT, captured 2026-08-24 | 1 | tdx_frequency_bands 100.0% |
-| Kaohsiung | TDX Rail/Metro v2 Frequency endpoint, KRTC and KLRT, captured 2026-08-24 | 2 | tdx_frequency_bands 100.0% |
+| Tokyo | Tokyo Metro, Toei, Yurikamome and Tokyo Monorail GTFS feeds (ODPT public centre), weekday trips per station pair, a train counts only where it stops (skip-stop rule of 2026-09-06) | 17 | gtfs weekday trips 100.0% |
+| Yokohama | 横浜市交通局 GTFS, feed_version 20241227 (valid to 2025-12-31) | 2 | gtfs weekday trips 100.0% |
+| Kyoto | 京都市交通局 GTFS, feed_version 20250701 (valid to 2026-03-31) | 2 | gtfs weekday trips 100.0% |
+| Sapporo | 札幌市交通局 GTFS version 1.000, calendar 2020 (the 2020 timetable, the only feed the operator publishes) | 3 | gtfs weekday trips 100.0% |
+| Sendai | 仙台市交通局 station timetables of the city open-data portal, revision 2023-07-01, converted to GTFS by jp_timetable_to_gtfs.py | 2 | gtfs weekday trips 100.0% |
+| Kobe | 神戸市交通局 open-data timetables, 西神・山手線・北神線 revision 2025-03-15 and 海岸線 revision 2022-09-09, converted to GTFS (node set from the 2006 build) | 2 | gtfs weekday trips 100.0% |
+| Fukuoka | 福岡市交通局 all-station Excel timetables, revisions 2025-03-15 and 2025-08-02 (Wayback copies of 2025-09-10), converted to GTFS-JP by the GTFS-FukuokaCitySubway tool | 3 | gtfs weekday trips 100.0% |
+| Seoul | KTDB national GTFS, March 2023 dataset (2024 release), weekday trips; Line 2 loop (route 2) keeps its 2025 frequency because the feed holds 39 trips per direction | 14 | gtfs weekday trips 82.7%, v1 value kept feed incomplete 17.3% |
+| Incheon | KTDB national GTFS, March 2023 dataset; 277 pairs and the 2024 extension station keep 2025 values the feed cannot produce | 3 | gtfs weekday trips 90.0%, v1 value kept feed incomplete 10.0% |
+| Busan | KTDB national GTFS, March 2023 dataset; the last 10 Line 2 trips are completed to 양산 (terminus truncation in the feed, corrected 2026-09-15) | 5 | gtfs weekday trips 100.0% |
+| Daegu | KTDB national GTFS, March 2023 dataset; 126 eastbound Line 1 trips completed to 안심 (terminus truncation in the feed, corrected 2026-09-15) | 3 | gtfs weekday trips 100.0% |
+| Taipei | TDX Rail/Metro v2 Frequency endpoint, TRTC, captured 2026-08-24, raw responses archived with SHA-256 | 9 | tdx frequency bands 100.0% |
+| Taoyuan | TDX Rail/Metro v2 Frequency endpoint, TYMC, captured 2026-08-24 | 1 | tdx frequency bands 100.0% |
+| Taichung | TDX Rail/Metro v2 Frequency endpoint, TMRT, captured 2026-08-24 | 1 | tdx frequency bands 100.0% |
+| Kaohsiung | TDX Rail/Metro v2 Frequency endpoint, KRTC and KLRT, captured 2026-08-24 | 2 | tdx frequency bands 100.0% |
 
 TDX operators with a Frequency record in the archived pull (live or cached response): KRTC, NTMC, TMRT, TRTC, TYMC. Licence: Taiwan Open Government Data License v1.0, attribute 交通部 (MOTC).
 
@@ -118,7 +118,7 @@ Hong Kong: the MTR service-hours page, 48 rows re-cited to the Wayback capture o
 
 The ratio is below one almost everywhere because the report counts every planned run including short-turn, express and depot movements, while our all-day frequency is the bottleneck of each section over 19 hours. It is printed as a plausibility bound, not as a target.
 
-Cities where the shortest transcribed peak falls below the reported minimum, with the route responsible: Beijing (亦庄线, route 21, 1.0 min, operator_timetable_departures); Foshan (广佛线, route 2, 5.0 min, published_peak_offpeak_only).
+Cities where the shortest transcribed peak falls below the reported minimum, with the route responsible: Beijing (亦庄线, route 21, 1.0 min, operator timetable departures); Foshan (广佛线, route 2, 5.0 min, published peak offpeak only).
 
 *Beijing.* The 1.0-minute figure comes from 亦庄线 (route 21), where a partial first or last service hour with two counted departures a minute apart enters the profile; every full-hour count on that line gives 3.75 min or more, and the shortest full-hour peak in the city is 2.0 min on 1号线八通线, 8号线 and 大兴机场线, at the reported 120 s minimum. The 1.72-minute value on 4号线大兴线 is the operator's published 1分43秒 minimum and passes within the 30 s tolerance.
 
@@ -130,7 +130,7 @@ Cities whose implied daily runs exceed the planned runs of the report (ratio abo
 
 ### Beijing
 
-Operators: 北京京港地铁有限公司; 北京市地铁运营有限公司; 北京市轨道交通运营管理有限公司. 28 routes. Basis: operator_timetable_departures 23, inherited_from_trunk 4, published_interval_band_section 1. URLs opened in the survey log: 130. Band files: Beijing_notice.csv (966 rows), Beijing_amap.csv (160 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 北京京港地铁有限公司; 北京市地铁运营有限公司; 北京市轨道交通运营管理有限公司. 28 routes. Basis: operator timetable departures 23, inherited from trunk 4, published interval band section 1. URLs opened in the survey log: 130. Band files: Beijing_notice.csv (966 rows), Beijing_amap.csv (160 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 1.0 min, lower bound NOT respected; implied daily runs 9247 against 10586.0 planned (ratio net of trams 0.902).
 
@@ -169,7 +169,7 @@ Note: The 1.0-minute figure comes from 亦庄线 (route 21), where a partial fir
 
 ### Changchun
 
-Operators: 长春市公交集团; 长春市轨道交通集团第四分公司. 6 routes. Basis: press_quoted_operator_notice 6. URLs opened in the survey log: 6. Band files: Changchun_notice.csv (16 rows), Changchun_amap.csv (50 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 长春市公交集团; 长春市轨道交通集团第四分公司. 6 routes. Basis: press quoted operator notice 6. URLs opened in the survey log: 6. Band files: Changchun_notice.csv (16 rows), Changchun_amap.csv (50 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 265.0 s, our shortest transcribed peak 5.0 min, lower bound respected; implied daily runs 1774 against 2035.0 planned (ratio net of trams 0.973).
 
@@ -184,7 +184,7 @@ CAMET 2025: minimum peak headway 265.0 s, our shortest transcribed peak 5.0 min,
 
 ### Changsha
 
-Operators: 湖南磁浮交通发展公司; 长沙轨道交通集团. 7 routes. Basis: published_peak_offpeak_only 6, inherited_from_trunk 1. URLs opened in the survey log: 10. Band files: Changsha_notice.csv (11 rows), Changsha_amap.csv (14 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 湖南磁浮交通发展公司; 长沙轨道交通集团. 7 routes. Basis: published peak offpeak only 6, inherited from trunk 1. URLs opened in the survey log: 10. Band files: Changsha_notice.csv (11 rows), Changsha_amap.csv (14 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 160.0 s, our shortest transcribed peak 3.65 min, lower bound respected; implied daily runs 1774 against 2825.0 planned (ratio net of trams 0.705).
 
@@ -200,7 +200,7 @@ CAMET 2025: minimum peak headway 160.0 s, our shortest transcribed peak 3.65 min
 
 ### Changzhou
 
-Operator: 常州轨交客运公司. 2 routes. Basis: published_peak_offpeak_only 2. URLs opened in the survey log: 13. Band files: Changzhou_notice.csv (2 rows), Changzhou_amap.csv (44 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 常州轨交客运公司. 2 routes. Basis: published peak offpeak only 2. URLs opened in the survey log: 13. Band files: Changzhou_notice.csv (2 rows), Changzhou_amap.csv (44 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 6.0 min, lower bound respected; implied daily runs 528 against 563.0 planned (ratio net of trams 0.939).
 
@@ -211,7 +211,7 @@ CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 6.0 min,
 
 ### Chengdu
 
-Operator: 成都轨道交通集团. 18 routes. Basis: transcription_2025_unsourced 11, published_peak_offpeak_only 4, press_quoted_operator_notice 2, amap_interval_band 1. URLs opened in the survey log: 32. Band files: Chengdu_notice.csv (11 rows), Chengdu_amap.csv (22 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 成都轨道交通集团. 18 routes. Basis: transcription 2025 unsourced 11, published peak offpeak only 4, press quoted operator notice 2, amap interval band 1. URLs opened in the survey log: 32. Band files: Chengdu_notice.csv (11 rows), Chengdu_amap.csv (22 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.0 min, lower bound respected; implied daily runs 5122 against 6740.0 planned (ratio net of trams 0.813).
 
@@ -238,7 +238,7 @@ CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.0 min,
 
 ### Chongqing
 
-Operator: 重庆轨道交通集团. 15 routes. Basis: published_peak_offpeak_only 7, published_interval_band_line 2, published_average_interval 2, press_quoted_operator_notice 2, inherited_from_trunk 1, amap_interval_band 1. URLs opened in the survey log: 34. Band files: Chongqing_notice.csv (41 rows), Chongqing_amap.csv (30 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 重庆轨道交通集团. 15 routes. Basis: published peak offpeak only 7, published interval band line 2, published average interval 2, press quoted operator notice 2, inherited from trunk 1, amap interval band 1. URLs opened in the survey log: 34. Band files: Chongqing_notice.csv (41 rows), Chongqing_amap.csv (30 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 150.0 s, our shortest transcribed peak 2.5 min, lower bound respected; implied daily runs 4366 against 4999.0 planned (ratio net of trams 0.898).
 
@@ -262,7 +262,7 @@ CAMET 2025: minimum peak headway 150.0 s, our shortest transcribed peak 2.5 min,
 
 ### Dalian
 
-Operator: 大连地铁集团. 7 routes. Basis: published_peak_offpeak_only 5, press_quoted_operator_notice 1, transcription_2025_unsourced 1. URLs opened in the survey log: 46. Band files: Dalian_notice.csv (44 rows), Dalian_amap.csv (49 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 大连地铁集团. 7 routes. Basis: published peak offpeak only 5, press quoted operator notice 1, transcription 2025 unsourced 1. URLs opened in the survey log: 46. Band files: Dalian_notice.csv (44 rows), Dalian_amap.csv (49 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 210.0 s, our shortest transcribed peak 3.5 min, lower bound respected; implied daily runs 1490 against 1724.0 planned (ratio net of trams 0.95).
 
@@ -278,7 +278,7 @@ CAMET 2025: minimum peak headway 210.0 s, our shortest transcribed peak 3.5 min,
 
 ### Dongguan
 
-Operator: 东莞轨道交通客运公司. 1 routes. Basis: press_quoted_operator_notice 1. URLs opened in the survey log: 8. Band files: Dongguan_notice.csv (3 rows), Dongguan_amap.csv (18 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 东莞轨道交通客运公司. 1 routes. Basis: press quoted operator notice 1. URLs opened in the survey log: 8. Band files: Dongguan_notice.csv (3 rows), Dongguan_amap.csv (18 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 375.0 s, our shortest transcribed peak 6.0 min, lower bound respected; implied daily runs 267 against 320.0 planned (ratio net of trams 0.836).
 
@@ -288,7 +288,7 @@ CAMET 2025: minimum peak headway 375.0 s, our shortest transcribed peak 6.0 min,
 
 ### Foshan
 
-Operators: 佛山市地铁运营有限公司 (佛山地铁集团子公司); 广州地铁集团有限公司 (广州地铁运营集团有限公司). 3 routes. Basis: published_interval_band_line 1, published_peak_offpeak_only 1, press_quoted_operator_notice 1. URLs opened in the survey log: 17. Band files: Foshan_notice.csv (20 rows), Foshan_amap.csv (30 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 佛山市地铁运营有限公司 (佛山地铁集团子公司); 广州地铁集团有限公司 (广州地铁运营集团有限公司). 3 routes. Basis: published interval band line 1, published peak offpeak only 1, press quoted operator notice 1. URLs opened in the survey log: 17. Band files: Foshan_notice.csv (20 rows), Foshan_amap.csv (30 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 339.0 s, our shortest transcribed peak 5.0 min, lower bound NOT respected; implied daily runs 1303 against 1067.0 planned (ratio net of trams 1.432).
 
@@ -302,7 +302,7 @@ Note: The 5.0-minute figure is the all-day interval of 广佛线, which is opera
 
 ### Fuzhou
 
-Operator: 福州地铁集团. 5 routes. Basis: published_interval_band_line 3, press_quoted_operator_notice 2. URLs opened in the survey log: 12. Band files: Fuzhou_notice.csv (30 rows), Fuzhou_amap.csv (128 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 福州地铁集团. 5 routes. Basis: published interval band line 3, press quoted operator notice 2. URLs opened in the survey log: 12. Band files: Fuzhou_notice.csv (30 rows), Fuzhou_amap.csv (128 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 270.0 s, our shortest transcribed peak 4.5 min, lower bound respected; implied daily runs 1420 against 1722.0 planned (ratio net of trams 0.824).
 
@@ -316,7 +316,7 @@ CAMET 2025: minimum peak headway 270.0 s, our shortest transcribed peak 4.5 min,
 
 ### Guangzhou
 
-Operators: 广东城际铁路运营有限公司 (广州地铁集团附属); 广州地铁集团有限公司 (广州地铁运营集团有限公司). 22 routes. Basis: published_peak_offpeak_only 10, transcription_2025_unsourced 5, amap_interval_band 3, published_interval_band_line 3, inherited_from_trunk 1. URLs opened in the survey log: 32. Band files: Guangzhou_notice.csv (45 rows), Guangzhou_amap.csv (88 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 广东城际铁路运营有限公司 (广州地铁集团附属); 广州地铁集团有限公司 (广州地铁运营集团有限公司). 22 routes. Basis: published peak offpeak only 10, transcription 2025 unsourced 5, amap interval band 3, published interval band line 3, inherited from trunk 1. URLs opened in the survey log: 32. Band files: Guangzhou_notice.csv (45 rows), Guangzhou_amap.csv (88 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 125.0 s, our shortest transcribed peak 2.233 min, lower bound respected; implied daily runs 7014 against 8579.0 planned (ratio net of trams 0.85).
 
@@ -347,7 +347,7 @@ CAMET 2025: minimum peak headway 125.0 s, our shortest transcribed peak 2.233 mi
 
 ### Guiyang
 
-Operator: . 4 routes. Basis: press_quoted_operator_notice 3, published_peak_offpeak_only 1. URLs opened in the survey log: 8. Band files: Guiyang_notice.csv (20 rows), Guiyang_amap.csv (70 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 4 routes. Basis: press quoted operator notice 3, published peak offpeak only 1. URLs opened in the survey log: 8. Band files: Guiyang_notice.csv (20 rows), Guiyang_amap.csv (70 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 330.0 s, our shortest transcribed peak 5.5 min, lower bound respected; implied daily runs 1064 against 1178.0 planned (ratio net of trams 0.903).
 
@@ -360,7 +360,7 @@ CAMET 2025: minimum peak headway 330.0 s, our shortest transcribed peak 5.5 min,
 
 ### Hangzhou
 
-Operators: 杭州地铁集团; 杭州杭港地铁有限公司. 15 routes. Basis: published_peak_offpeak_only 12, press_quoted_operator_notice 2, amap_interval_band 1. URLs opened in the survey log: 18. Band files: Hangzhou_notice.csv (33 rows), Hangzhou_amap.csv (38 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 杭州地铁集团; 杭州杭港地铁有限公司. 15 routes. Basis: published peak offpeak only 12, press quoted operator notice 2, amap interval band 1. URLs opened in the survey log: 18. Band files: Hangzhou_notice.csv (33 rows), Hangzhou_amap.csv (38 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 135.0 s, our shortest transcribed peak 2.417 min, lower bound respected; implied daily runs 4406 against 4959.0 planned (ratio net of trams 0.888).
 
@@ -384,7 +384,7 @@ CAMET 2025: minimum peak headway 135.0 s, our shortest transcribed peak 2.417 mi
 
 ### Harbin
 
-Operator: 哈尔滨地铁集团. 5 routes. Basis: published_peak_offpeak_only 3, press_quoted_operator_notice 2. URLs opened in the survey log: 6. Band files: Harbin_notice.csv (10 rows), Harbin_amap.csv (90 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 哈尔滨地铁集团. 5 routes. Basis: published peak offpeak only 3, press quoted operator notice 2. URLs opened in the survey log: 6. Band files: Harbin_notice.csv (10 rows), Harbin_amap.csv (90 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 119.0 s, our shortest transcribed peak 3.967 min, lower bound respected; implied daily runs 970 against 1344.0 planned (ratio net of trams 0.865).
 
@@ -398,7 +398,7 @@ CAMET 2025: minimum peak headway 119.0 s, our shortest transcribed peak 3.967 mi
 
 ### Hefei
 
-Operator: 合肥城市轨道交通公司. 6 routes. Basis: published_interval_band_line 6. URLs opened in the survey log: 9. Band files: Hefei_notice.csv (18 rows), Hefei_amap.csv (136 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 合肥城市轨道交通公司. 6 routes. Basis: published interval band line 6. URLs opened in the survey log: 9. Band files: Hefei_notice.csv (18 rows), Hefei_amap.csv (136 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 208.0 s, our shortest transcribed peak 3.967 min, lower bound respected; implied daily runs 1853 against 2162.0 planned (ratio net of trams 0.857).
 
@@ -413,7 +413,7 @@ CAMET 2025: minimum peak headway 208.0 s, our shortest transcribed peak 3.967 mi
 
 ### Hohhot
 
-Operator: . 2 routes. Basis: press_quoted_operator_notice 2. URLs opened in the survey log: 4. Band files: Hohhot_notice.csv (10 rows), Hohhot_amap.csv (44 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: press quoted operator notice 2. URLs opened in the survey log: 4. Band files: Hohhot_notice.csv (10 rows), Hohhot_amap.csv (44 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 6.0 min, lower bound respected; implied daily runs 437 against 460.0 planned (ratio net of trams 0.95).
 
@@ -424,7 +424,7 @@ CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 6.0 min,
 
 ### Jinan
 
-Operator: . 3 routes. Basis: press_quoted_operator_notice 2, amap_interval_band 1. URLs opened in the survey log: 6. Band files: Jinan_notice.csv (7 rows), Jinan_amap.csv (52 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 3 routes. Basis: press quoted operator notice 2, amap interval band 1. URLs opened in the survey log: 6. Band files: Jinan_notice.csv (7 rows), Jinan_amap.csv (52 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 270.0 s, our shortest transcribed peak 5.0 min, lower bound respected; implied daily runs 798 against 939.0 planned (ratio net of trams 1.161).
 
@@ -436,7 +436,7 @@ CAMET 2025: minimum peak headway 270.0 s, our shortest transcribed peak 5.0 min,
 
 ### Jinhua
 
-Operator: . 2 routes. Basis: published_peak_offpeak_only 2. URLs opened in the survey log: 4. Band files: Jinhua_notice.csv (2 rows), Jinhua_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: published peak offpeak only 2. URLs opened in the survey log: 4. Band files: Jinhua_notice.csv (2 rows), Jinhua_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 600.0 s, our shortest transcribed peak 11.163 min, lower bound respected; implied daily runs 314 against 411.0 planned (ratio net of trams 0.763).
 
@@ -447,7 +447,7 @@ CAMET 2025: minimum peak headway 600.0 s, our shortest transcribed peak 11.163 m
 
 ### Kunming
 
-Operator: 昆明轨道交通有限公司. 7 routes. Basis: amap_interval_band 3, published_peak_offpeak_only 2, inherited_from_trunk 1, press_quoted_operator_notice 1. URLs opened in the survey log: 16. Band files: Kunming_notice.csv (19 rows), Kunming_amap.csv (92 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 昆明轨道交通有限公司. 7 routes. Basis: amap interval band 3, published peak offpeak only 2, inherited from trunk 1, press quoted operator notice 1. URLs opened in the survey log: 16. Band files: Kunming_notice.csv (19 rows), Kunming_amap.csv (92 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 230.0 s, our shortest transcribed peak 4.0 min, lower bound respected; implied daily runs 1576 against 1530.0 planned (ratio net of trams 1.03).
 
@@ -463,7 +463,7 @@ CAMET 2025: minimum peak headway 230.0 s, our shortest transcribed peak 4.0 min,
 
 ### Lanzhou
 
-Operator: . 2 routes. Basis: published_interval_band_line 1, press_quoted_operator_notice 1. URLs opened in the survey log: 7. Band files: Lanzhou_notice.csv (11 rows), Lanzhou_amap.csv (16 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: published interval band line 1, press quoted operator notice 1. URLs opened in the survey log: 7. Band files: Lanzhou_notice.csv (11 rows), Lanzhou_amap.csv (16 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 240.0 s, our shortest transcribed peak 6.333 min, lower bound respected; implied daily runs 477 against 593.0 planned (ratio net of trams 0.804).
 
@@ -474,7 +474,7 @@ CAMET 2025: minimum peak headway 240.0 s, our shortest transcribed peak 6.333 mi
 
 ### Luoyang
 
-Operator: 洛阳市轨道交通集团有限责任公司. 2 routes. Basis: published_interval_band_line 2. URLs opened in the survey log: 7. Band files: Luoyang_notice.csv (10 rows), Luoyang_amap.csv (32 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 洛阳市轨道交通集团有限责任公司. 2 routes. Basis: published interval band line 2. URLs opened in the survey log: 7. Band files: Luoyang_notice.csv (10 rows), Luoyang_amap.csv (32 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 7.0 min, lower bound respected; implied daily runs 414 against 473.0 planned (ratio net of trams 0.875).
 
@@ -485,7 +485,7 @@ CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 7.0 min,
 
 ### Nanchang
 
-Operator: 南昌轨道交通集团. 7 routes. Basis: published_peak_offpeak_only 5, published_interval_band_line 2. URLs opened in the survey log: 6. Band files: Nanchang_notice.csv (9 rows), Nanchang_amap.csv (52 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 南昌轨道交通集团. 7 routes. Basis: published peak offpeak only 5, published interval band line 2. URLs opened in the survey log: 6. Band files: Nanchang_notice.csv (9 rows), Nanchang_amap.csv (52 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 236.0 s, our shortest transcribed peak 3.933 min, lower bound respected; implied daily runs 1372 against 1545.0 planned (ratio net of trams 0.888).
 
@@ -501,7 +501,7 @@ CAMET 2025: minimum peak headway 236.0 s, our shortest transcribed peak 3.933 mi
 
 ### Nanjing
 
-Operator: 南京地铁集团有限公司. 13 routes. Basis: amap_interval_band 5, published_peak_offpeak_only 4, transcription_2025_unsourced 4. URLs opened in the survey log: 30. Band files: Nanjing_notice.csv (28 rows), Nanjing_amap.csv (73 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 南京地铁集团有限公司. 13 routes. Basis: amap interval band 5, published peak offpeak only 4, transcription 2025 unsourced 4. URLs opened in the survey log: 30. Band files: Nanjing_notice.csv (28 rows), Nanjing_amap.csv (73 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.0 min, lower bound respected; implied daily runs 4164 against 4474.0 planned (ratio net of trams 0.961).
 
@@ -523,7 +523,7 @@ CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.0 min,
 
 ### Nanning
 
-Operator: 南宁轨道交通集团. 5 routes. Basis: press_quoted_operator_notice 5. URLs opened in the survey log: 13. Band files: Nanning_notice.csv (17 rows), Nanning_amap.csv (153 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 南宁轨道交通集团. 5 routes. Basis: press quoted operator notice 5. URLs opened in the survey log: 13. Band files: Nanning_notice.csv (17 rows), Nanning_amap.csv (153 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 210.0 s, our shortest transcribed peak 3.5 min, lower bound respected; implied daily runs 1514 against 1798.0 planned (ratio net of trams 0.842).
 
@@ -537,7 +537,7 @@ CAMET 2025: minimum peak headway 210.0 s, our shortest transcribed peak 3.5 min,
 
 ### Nantong
 
-Operator: . 2 routes. Basis: published_interval_band_line 1, press_quoted_operator_notice 1. URLs opened in the survey log: 15. Band files: Nantong_notice.csv (12 rows), Nantong_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: published interval band line 1, press quoted operator notice 1. URLs opened in the survey log: 15. Band files: Nantong_notice.csv (12 rows), Nantong_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 390.0 s, our shortest transcribed peak 6.833 min, lower bound respected; implied daily runs 461 against 560.0 planned (ratio net of trams 0.823).
 
@@ -548,7 +548,7 @@ CAMET 2025: minimum peak headway 390.0 s, our shortest transcribed peak 6.833 mi
 
 ### Ningbo
 
-Operator: 宁波轨道交通集团. 7 routes. Basis: press_quoted_operator_notice 5, published_interval_band_line 1, amap_interval_band 1. URLs opened in the survey log: 5. Band files: Ningbo_notice.csv (21 rows), Ningbo_amap.csv (54 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 宁波轨道交通集团. 7 routes. Basis: press quoted operator notice 5, published interval band line 1, amap interval band 1. URLs opened in the survey log: 5. Band files: Ningbo_notice.csv (21 rows), Ningbo_amap.csv (54 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 238.0 s, our shortest transcribed peak 4.0 min, lower bound respected; implied daily runs 2060 against 2765.0 planned (ratio net of trams 0.745).
 
@@ -564,7 +564,7 @@ CAMET 2025: minimum peak headway 238.0 s, our shortest transcribed peak 4.0 min,
 
 ### Qingdao
 
-Operator: 青岛地铁集团. 9 routes. Basis: press_quoted_operator_notice 9. URLs opened in the survey log: 9. Band files: Qingdao_notice.csv (58 rows), Qingdao_amap.csv (123 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 青岛地铁集团. 9 routes. Basis: press quoted operator notice 9. URLs opened in the survey log: 9. Band files: Qingdao_notice.csv (58 rows), Qingdao_amap.csv (123 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 145.0 s, our shortest transcribed peak 3.167 min, lower bound respected; implied daily runs 2043 against 2746.0 planned (ratio net of trams 0.762).
 
@@ -582,7 +582,7 @@ CAMET 2025: minimum peak headway 145.0 s, our shortest transcribed peak 3.167 mi
 
 ### Shanghai
 
-Operator: 上海申通地铁集团有限公司. 23 routes. Basis: published_interval_band_section 22, published_average_interval 1. No survey log: transcribed from the operator's own interval table. Band files: Shanghai.csv (250 rows), Shanghai_amap.csv (391 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 上海申通地铁集团有限公司. 23 routes. Basis: published interval band section 22, published average interval 1. No survey log: transcribed from the operator's own interval table. Band files: Shanghai.csv (250 rows), Shanghai_amap.csv (391 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 110.0 s, our shortest transcribed peak 1.833 min, lower bound respected; implied daily runs 7425 against 9957.0 planned (ratio net of trams 0.839).
 
@@ -614,7 +614,7 @@ CAMET 2025: minimum peak headway 110.0 s, our shortest transcribed peak 1.833 mi
 
 ### Shaoxing
 
-Operator: . 2 routes. Basis: press_quoted_operator_notice 2. URLs opened in the survey log: 9. Band files: Shaoxing_notice.csv (6 rows), Shaoxing_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: press quoted operator notice 2. URLs opened in the survey log: 9. Band files: Shaoxing_notice.csv (6 rows), Shaoxing_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 6.0 min, lower bound respected; implied daily runs 536 against 1242.0 planned (ratio net of trams 0.432).
 
@@ -625,7 +625,7 @@ CAMET 2025: minimum peak headway 360.0 s, our shortest transcribed peak 6.0 min,
 
 ### Shenyang
 
-Operator: 沈阳地铁巴士公交公司. 6 routes. Basis: published_peak_offpeak_only 6. URLs opened in the survey log: 19. Band files: Shenyang_notice.csv (10 rows), Shenyang_amap.csv (21 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 沈阳地铁巴士公交公司. 6 routes. Basis: published peak offpeak only 6. URLs opened in the survey log: 19. Band files: Shenyang_notice.csv (10 rows), Shenyang_amap.csv (21 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 175.0 s, our shortest transcribed peak 2.917 min, lower bound respected; implied daily runs 1925 against 2379.0 planned (ratio net of trams 1.228).
 
@@ -640,7 +640,7 @@ CAMET 2025: minimum peak headway 175.0 s, our shortest transcribed peak 2.917 mi
 
 ### Shenzhen
 
-Operators: 深圳市地铁集团有限公司; 港铁轨道交通(深圳)有限公司. 16 routes. Basis: published_peak_offpeak_only 9, published_interval_band_section 2, amap_interval_band 2, published_interval_band_line 2, published_average_interval 1. URLs opened in the survey log: 24. Band files: Shenzhen_notice.csv (47 rows), Shenzhen_amap.csv (100 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operators: 深圳市地铁集团有限公司; 港铁轨道交通(深圳)有限公司. 16 routes. Basis: published peak offpeak only 9, published interval band section 2, amap interval band 2, published interval band line 2, published average interval 1. URLs opened in the survey log: 24. Band files: Shenzhen_notice.csv (47 rows), Shenzhen_amap.csv (100 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 115.0 s, our shortest transcribed peak 1.917 min, lower bound respected; implied daily runs 6555 against 7754.0 planned (ratio net of trams 0.872).
 
@@ -665,7 +665,7 @@ CAMET 2025: minimum peak headway 115.0 s, our shortest transcribed peak 1.917 mi
 
 ### Shijiazhuang
 
-Operator: 石家庄市轨道交通有限责任公司. 3 routes. Basis: published_interval_band_line 3. URLs opened in the survey log: 9. Band files: Shijiazhuang_notice.csv (12 rows), Shijiazhuang_amap.csv (48 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 石家庄市轨道交通有限责任公司. 3 routes. Basis: published interval band line 3. URLs opened in the survey log: 9. Band files: Shijiazhuang_notice.csv (12 rows), Shijiazhuang_amap.csv (48 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 300.0 s, our shortest transcribed peak 5.0 min, lower bound respected; implied daily runs 780 against 927.0 planned (ratio net of trams 0.841).
 
@@ -677,7 +677,7 @@ CAMET 2025: minimum peak headway 300.0 s, our shortest transcribed peak 5.0 min,
 
 ### Suzhou
 
-Operator: 苏州市轨道交通集团有限公司. 9 routes. Basis: published_peak_offpeak_only 6, amap_interval_band 2, press_quoted_operator_notice 1. URLs opened in the survey log: 10. Band files: Suzhou_notice.csv (18 rows), Suzhou_amap.csv (159 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 苏州市轨道交通集团有限公司. 9 routes. Basis: published peak offpeak only 6, amap interval band 2, press quoted operator notice 1. URLs opened in the survey log: 10. Band files: Suzhou_notice.csv (18 rows), Suzhou_amap.csv (159 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.0 min, lower bound respected; implied daily runs 2930 against 4357.0 planned (ratio net of trams 0.772).
 
@@ -695,7 +695,7 @@ CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.0 min,
 
 ### Taiyuan
 
-Operator: . 2 routes. Basis: published_interval_band_line 1, press_quoted_operator_notice 1. URLs opened in the survey log: 18. Band files: Taiyuan_notice.csv (6 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: published interval band line 1, press quoted operator notice 1. URLs opened in the survey log: 18. Band files: Taiyuan_notice.csv (6 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 390.0 s, our shortest transcribed peak 6.5 min, lower bound respected; implied daily runs 549 against 559.0 planned (ratio net of trams 0.982).
 
@@ -706,7 +706,7 @@ CAMET 2025: minimum peak headway 390.0 s, our shortest transcribed peak 6.5 min,
 
 ### Taizhou
 
-Operator: . 1 routes. Basis: published_peak_offpeak_only 1. URLs opened in the survey log: 5. Band files: Taizhou_notice.csv (3 rows), Taizhou_amap.csv (16 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 1 routes. Basis: published peak offpeak only 1. URLs opened in the survey log: 5. Band files: Taizhou_notice.csv (3 rows), Taizhou_amap.csv (16 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 | Route | Line name (English) | Basis | Peak (min) | Off-peak (min) | Trains/h | Constant fill | Statement date (or read date) | Type | Source |
 |---|---|---|---|---|---|---|---|---|---|
@@ -714,7 +714,7 @@ Operator: . 1 routes. Basis: published_peak_offpeak_only 1. URLs opened in the s
 
 ### Tianjin
 
-Operator: 天津轨道交通运营集团有限公司. 12 routes. Basis: published_peak_offpeak_only 7, amap_interval_band 4, press_quoted_operator_notice 1. URLs opened in the survey log: 26. Band files: Tianjin_notice.csv (17 rows), Tianjin_amap.csv (214 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 天津轨道交通运营集团有限公司. 12 routes. Basis: published peak offpeak only 7, amap interval band 4, press quoted operator notice 1. URLs opened in the survey log: 26. Band files: Tianjin_notice.csv (17 rows), Tianjin_amap.csv (214 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 180.0 s, our shortest transcribed peak 3.25 min, lower bound respected; implied daily runs 3027 against 4020.0 planned (ratio net of trams 0.753).
 
@@ -735,7 +735,7 @@ CAMET 2025: minimum peak headway 180.0 s, our shortest transcribed peak 3.25 min
 
 ### Wenzhou
 
-Operator: . 2 routes. Basis: published_interval_band_line 1, published_peak_offpeak_only 1. URLs opened in the survey log: 4. Band files: Wenzhou_notice.csv (6 rows), Wenzhou_amap.csv (34 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: published interval band line 1, published peak offpeak only 1. URLs opened in the survey log: 4. Band files: Wenzhou_notice.csv (6 rows), Wenzhou_amap.csv (34 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 300.0 s, our shortest transcribed peak 9.283 min, lower bound respected; implied daily runs 394 against 455.0 planned (ratio net of trams 0.866).
 
@@ -746,7 +746,7 @@ CAMET 2025: minimum peak headway 300.0 s, our shortest transcribed peak 9.283 mi
 
 ### Wuhan
 
-Operator: 武汉地铁集团有限公司. 12 routes. Basis: published_peak_offpeak_only 6, amap_interval_band 3, transcription_2025_unsourced 3. URLs opened in the survey log: 8. Band files: Wuhan_notice.csv (9 rows), Wuhan_amap.csv (68 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 武汉地铁集团有限公司. 12 routes. Basis: published peak offpeak only 6, amap interval band 3, transcription 2025 unsourced 3. URLs opened in the survey log: 8. Band files: Wuhan_notice.csv (9 rows), Wuhan_amap.csv (68 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 150.0 s, our shortest transcribed peak 2.7 min, lower bound respected; implied daily runs 4249 against 5196.0 planned (ratio net of trams 0.927).
 
@@ -767,7 +767,7 @@ CAMET 2025: minimum peak headway 150.0 s, our shortest transcribed peak 2.7 min,
 
 ### Wuhu
 
-Operator: . 2 routes. Basis: published_peak_offpeak_only 2. URLs opened in the survey log: 6. Band files: Wuhu_notice.csv (2 rows), Wuhu_amap.csv (8 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: published peak offpeak only 2. URLs opened in the survey log: 6. Band files: Wuhu_notice.csv (2 rows), Wuhu_amap.csv (8 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 334.0 s, our shortest transcribed peak 5.567 min, lower bound respected; implied daily runs 417 against 597.0 planned (ratio net of trams 0.698).
 
@@ -778,7 +778,7 @@ CAMET 2025: minimum peak headway 334.0 s, our shortest transcribed peak 5.567 mi
 
 ### Wuxi
 
-Operator: 无锡市地铁集团有限公司. 4 routes. Basis: published_peak_offpeak_only 3, press_quoted_operator_notice 1. URLs opened in the survey log: 11. Band files: Wuxi_notice.csv (10 rows), Wuxi_amap.csv (67 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 无锡市地铁集团有限公司. 4 routes. Basis: published peak offpeak only 3, press quoted operator notice 1. URLs opened in the survey log: 11. Band files: Wuxi_notice.csv (10 rows), Wuxi_amap.csv (67 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 300.0 s, our shortest transcribed peak 5.0 min, lower bound respected; implied daily runs 1060 against 1521.0 planned (ratio net of trams 0.697).
 
@@ -791,7 +791,7 @@ CAMET 2025: minimum peak headway 300.0 s, our shortest transcribed peak 5.0 min,
 
 ### Xiamen
 
-Operator: 厦门轨道交通集团. 3 routes. Basis: published_interval_band_line 1, published_peak_offpeak_only 1, published_interval_band_section 1. URLs opened in the survey log: 6. Band files: Xiamen_notice.csv (12 rows), Xiamen_amap.csv (46 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 厦门轨道交通集团. 3 routes. Basis: published interval band line 1, published peak offpeak only 1, published interval band section 1. URLs opened in the survey log: 6. Band files: Xiamen_notice.csv (12 rows), Xiamen_amap.csv (46 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 160.0 s, our shortest transcribed peak 2.667 min, lower bound respected; implied daily runs 1025 against 1188.0 planned (ratio net of trams 0.863).
 
@@ -803,7 +803,7 @@ CAMET 2025: minimum peak headway 160.0 s, our shortest transcribed peak 2.667 mi
 
 ### Xian
 
-Operator: 西安地下铁道客运公司. 12 routes. Basis: published_peak_offpeak_only 12. URLs opened in the survey log: 10. Band files: Xian_notice.csv (18 rows), Xian_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 西安地下铁道客运公司. 12 routes. Basis: published peak offpeak only 12. URLs opened in the survey log: 10. Band files: Xian_notice.csv (18 rows), Xian_amap.csv (10 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.467 min, lower bound respected; implied daily runs 3814 against 4543.0 planned (ratio net of trams 0.885).
 
@@ -824,7 +824,7 @@ CAMET 2025: minimum peak headway 120.0 s, our shortest transcribed peak 2.467 mi
 
 ### Xuzhou
 
-Operator: . 3 routes. Basis: press_quoted_operator_notice 2, published_interval_band_line 1. URLs opened in the survey log: 6. Band files: Xuzhou_notice.csv (11 rows), Xuzhou_amap.csv (26 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 3 routes. Basis: press quoted operator notice 2, published interval band line 1. URLs opened in the survey log: 6. Band files: Xuzhou_notice.csv (11 rows), Xuzhou_amap.csv (26 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 330.0 s, our shortest transcribed peak 5.5 min, lower bound respected; implied daily runs 777 against 890.0 planned (ratio net of trams 0.873).
 
@@ -836,7 +836,7 @@ CAMET 2025: minimum peak headway 330.0 s, our shortest transcribed peak 5.5 min,
 
 ### Zhengzhou
 
-Operator: 郑州轨道交通客运公司. 14 routes. Basis: amap_interval_band 7, published_peak_offpeak_only 5, press_quoted_operator_notice 1, published_interval_band_line 1. URLs opened in the survey log: 28. Band files: Zhengzhou_notice.csv (40 rows), Zhengzhou_amap.csv (127 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: 郑州轨道交通客运公司. 14 routes. Basis: amap interval band 7, published peak offpeak only 5, press quoted operator notice 1, published interval band line 1. URLs opened in the survey log: 28. Band files: Zhengzhou_notice.csv (40 rows), Zhengzhou_amap.csv (127 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 170.0 s, our shortest transcribed peak 3.0 min, lower bound respected; implied daily runs 3147 against 3611.0 planned (ratio net of trams 0.871).
 
@@ -859,7 +859,7 @@ CAMET 2025: minimum peak headway 170.0 s, our shortest transcribed peak 3.0 min,
 
 ### Ürümqi
 
-Operator: . 2 routes. Basis: press_quoted_operator_notice 1, published_peak_offpeak_only 1. URLs opened in the survey log: 18. Band files: Ürümqi_notice.csv (15 rows), Ürümqi_amap.csv (22 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
+Operator: . 2 routes. Basis: press quoted operator notice 1, published peak offpeak only 1. URLs opened in the survey log: 18. Band files: Ürümqi_notice.csv (15 rows), Ürümqi_amap.csv (22 rows). Amap bands from the one-off pull of 2026-08-22 to 2026-08-24.
 
 CAMET 2025: minimum peak headway 375.0 s, our shortest transcribed peak 6.0 min, lower bound respected; implied daily runs 326 against 258.0 planned (ratio net of trams 1.262).
 

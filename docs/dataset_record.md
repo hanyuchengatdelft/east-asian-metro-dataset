@@ -40,6 +40,14 @@ Incheon is unchanged at 68 stations and retains the Line 7 section. Guangzhou re
 | Daegu | 31 P-space pairs into 안심 re-counted from 1.105 to 7.68 or 7.74 trains per hour (27.1 to 3.9 min wait). L-space link 각산 to 안심 timed on 147 trips instead of 21. Link 반야월 to 각산 84 to 105 s (downstream dwell restored) | 88, unchanged | The KTDB 2023 feed cuts 126 of the 148 eastbound Line 1 trips at 각산, one stop short of 안심, with the 각산 row flagged as terminal, so only the 21 trips after 21:09 reached 안심 in the count. Trips are completed to the terminus before counting (`ktdb_rebuild_fix.diff`). The corrected values equal the reverse direction edge for edge. |
 | Busan | 42 P-space pairs into 양산 re-counted, +0.53 trains per hour (waits 4.35 to 4.04 and 4.42 to 4.10 min). L-space link 남양산 to 양산 timed on 155 trips instead of 145 | 127, unchanged | Same feed artefact: the last ten Line 2 trips toward 양산 end at 남양산. |
 
+## Correction of 5 October 2026: node ids made contiguous
+
+| City | Change | Stations | Ground |
+|---|---|---|---|
+| Daegu, Foshan, Guangzhou, Seoul, Xi'an | Node ids renumbered to run from 0 to N-1 in the order of the node list, in both the L-space and the P-space file. The previous id is kept on every node as `v1_id`. Links are remapped accordingly. No station, link or attribute value changed, and the counts are unchanged (Daegu 88, Foshan 56, Guangzhou 292, Seoul 285, Xi'an 237). | unchanged | The corrections of 12 and 15 September removed stations from these five networks without renumbering, which left gaps in the id sequence (highest id 90, 63, 308, 295 and 237 for 88, 56, 292, 285 and 237 nodes). Every other file, and every version 1 file, has contiguous ids, and code that reads station coordinates by list position and links by id, as the manuscript's map figure does, then joined the wrong stations. Each file records the change under `graph.freeze.correction_12`. |
+
+Node ids therefore coincide with list positions in all 62 networks, so a node's id can be used as its index into the node list.
+
 ## The urban-scope sample
 
 The register records 30 included routes in 15 cities as metropolitan in scope (`T3_scope`). They stay in the networks and are removed in the urban-scope sensitivity sample, which keeps 58 networks, because Jinhua, Taizhou, Taoyuan and Wenzhou have no urban-scope route.
@@ -62,4 +70,4 @@ The register holds 420 rows, 418 included and 2 excluded.
 - The fix to the Korean rebuild script, a function `complete_truncated_termini` that completes each trip to its terminus before pairs are counted, is applied in the companion repository as `code/ktdb_rebuild.py`. A rebuild from the KTDB feed therefore reproduces the Daegu and Busan corrections.
 - The 31 Daegu and 42 Busan pairs are tabulated in the companion repository with their old and new values, from the patched rebuild and from a direct count of the feed, which agree.
 
-The files in this repository are these corrected files, published on 15 September 2026.
+The files in this repository are these corrected files, published on 15 September 2026, with the node ids of five networks renumbered on 5 October 2026.

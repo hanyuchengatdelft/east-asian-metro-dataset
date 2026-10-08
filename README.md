@@ -7,14 +7,22 @@ This repository provides metro network data for 62 East Asian cities in two grap
 The dataset accompanies the manuscript Accessibility Analysis of East Asian Metro Systems by Rajat Verma, Hanyu Cheng, and Oded Cats. It is published to support reuse of the data and reproduction of the study’s analyses.
 
 ## Inclusion criteria and scope
-Prior to the actual data collection, it will be first and foremost important to specify the study area. In our study, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the [United Nations M49 geographical classification](https://unstats.un.org/unsd/methodology/m49/).
+In this dataset, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the [United Nations M49 geographical classification](https://unstats.un.org/unsd/methodology/m49/). Within this region, we consider cities with **urban rail transit**, defined here as rail-based public passenger transport serving urban areas ([Vuchic, 2007](https://doi.org/10.1002/9780470168066); [Megna and Bracciali, 2022](https://doi.org/10.1007/s40864-021-00163-6)). Where sufficient data are available, we construct a metro network for each city using only lines that meet both of the following criteria:
 
-For each city in the study area, we select metro networks from the networks of broader category of urban rail transit with sufficient data coverage, considered here as all rail-based public passenger transport serving urban areas~\citep{Vuchic2007,MegnaBracciali2022}. Where sufficient data are available, we construct a metro network for each city using only urban rail lines that meet both of the following criteria:
+### Criterion 1: Technical requirements
+
+Drawing on the technical requirements of the International Association of Public Transport (UITP, 2025), we include guided, electrically powered urban passenger services that operate on an exclusive right of way, with trains comprising at least two cars and accommodating at least 100 passengers.
+
+This criterion accommodates technologies beyond conventional steel-wheel metro. These account for 22 of the 418 included lines across 13 cities:
+
+- Straddle monorail: Seven lines in Chongqing (Lines 2 and 3, with an additional branch of Line 3), Wuhu (Lines 1 and 2), Daegu (Line 3) and Tokyo (Tokyo Monorail).
+- Rubber-tyred automated guideway transit and people movers: Yurikamome and the Nippori–Toneri Liner in Tokyo, all three Macau lines, the Wenhu Line in Taipei, Busan Line 4, the Sillim Line in Seoul, and the APM lines in Guangzhou and Shanghai.
+- Rubber-tyred metro with a central guide rail: All three Sapporo subway lines.
+- Medium- and low-speed maglev: Beijing Line S1 and the Changsha Maglev Express.
 
 
-In this study, ``East Asia'' refers to the ``Eastern Asia'' subregion (code~030) as defined in the United Nations M49 geographical classification~\citep{UNSD_M49}. For each city in the study area, we select metro networks from the networks of broader category of urban rail transit with sufficient data coverage, considered here as all rail-based public passenger transport serving urban areas~\citep{Vuchic2007,MegnaBracciali2022}. Where sufficient data are available, we construct a metro network for each city using only urban rail lines that meet both of the following criteria:
 
-
+Restricting the dataset to conventional steel-wheel metro would omit functionally comparable services. Ten city networks would be represented only partially, while the Macau, Sapporo and Wuhu networks would be excluded entirely.
 
 For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."
 

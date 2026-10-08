@@ -42,8 +42,10 @@ In short, **the dataset use a boder defition to include a few systems that are n
 
 The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 
-## Data source and network construction
-The construction of metro networks in L-space and P-space requires at least four types of service-information-related input, regardless of the data source:
+## Network construction
+
+### Essential input
+Regardless of the data source, constructing L-space and P-space representations of metro networks that incorporate service information for access-graph analysis requires at least four types of input:
 
 1. **Stations:** The set of stations forming each network, identified by their names and geographical coordinates. Each station is represented as a node in both graph representations.
 2. **Service routes:** The ordered sequence of stations served by each line and direction, including branches, short-turn services and distinct operating patterns. These determine the connections between consecutive stations in L-space and the station pairs reachable without a transfer in P-space.
@@ -63,7 +65,7 @@ The precise definitions of the graph representations and their attributes are pr
 | KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
 | TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
 
-This section explains how each of the 62 networks was built from its source. Three kinds of raw material were used: GTFS feeds or timetables converted to GTFS for the Japanese and Korean networks, a JSON API for the Taiwanese networks, and the Amap subway service for the 47 networks of mainland China, Hong Kong and Macau, which is not a timetable and required its own methods. The text first states what every network must contain and the definitions all sources share, then walks through each source from raw data to the two graphs, and closes with what a reader must know before computing with the files and how far the build can be reproduced. `docs/data_dictionary.md` defines every field, `docs/frequency_sources.md` traces every frequency to its source, `docs/dataset_record.md` records the corrections applied to the published files, and `docs/network_construction_by_city.csv` holds the per-network table below as data.
+Three kinds of raw material were used: GTFS feeds or timetables converted to GTFS for the Japanese and Korean networks, a JSON API for the Taiwanese networks, and the Amap subway service for the 47 networks of mainland China, Hong Kong and Macau, which is not a timetable and required its own methods. The text first states what every network must contain and the definitions all sources share, then walks through each source from raw data to the two graphs, and closes with what a reader must know before computing with the files and how far the build can be reproduced. `docs/data_dictionary.md` defines every field, `docs/frequency_sources.md` traces every frequency to its source, `docs/dataset_record.md` records the corrections applied to the published files, and `docs/network_construction_by_city.csv` holds the per-network table below as data.
 
 ### Essential inputs and data requirement
 

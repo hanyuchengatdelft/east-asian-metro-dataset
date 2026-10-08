@@ -1,14 +1,28 @@
 # East Asian metro dataset / 东亚地铁数据库 / 東亞地鐵數據庫 / 東アジアの地下鉄データセット / 동아시아 지하철 데이터셋
 
-<!-- In this dataset, 62 cities's metro networks could be found in two representation styles. For each citis, the whole urban rail transit is being looked at, what remains are the metro line that statisfy UITP defintioon 
+## Summary
+
+This repository provides metro network data for 62 East Asian cities in two graph representations, namely the L-space and P-space (von Ferber et al., 2009). Both representations use stations as nodes. In L-space, a link connects two stations that are consecutive stops on at least one route. In P-space, a link connects two stations served by at least one common route, representing travel without a transfer, regardless of the number of intermediate stops.
+
+The dataset accompanies the manuscript Accessibility Analysis of East Asian Metro Systems by Rajat Verma, Hanyu Cheng, and Oded Cats. It is published to support reuse of the data and reproduction of the study’s analyses.
+
+## Inclusion criteria and scope
+In this study, ``East Asia'' refers to the ``Eastern Asia'' subregion (code~030) as defined in the United Nations M49 geographical classification~\citep{UNSD_M49}. For each city in the study area, we select metro networks from the networks of broader category of urban rail transit with sufficient data coverage, considered here as all rail-based public passenger transport serving urban areas~\citep{Vuchic2007,MegnaBracciali2022}. Where sufficient data are available, we construct a metro network for each city using only urban rail lines that meet both of the following criteria:
 
 
 
-Sixty-two metro networks of East Asia in two graph spaces, with the line-level inclusion rule that decided what each network contains. This is the dataset of record for the manuscript *Accessibility Analysis of East Asian Metro Systems* (Hanyu Cheng, Rajat Verma, Oded Cats, Delft University of Technology, Transport and Planning department).
+For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."
 
-The two representations are L-space, in which a link joins consecutive stations along a line, and P-space, in which a link joins every pair of stations reachable without a transfer (von Ferber et al., 2009). L-space carries the in-vehicle times and P-space the service frequencies and waiting times, so together they hold the infrastructure and the service dimension of each network.
+The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 
-The dataset covers networks in 45 mainland Chinese cities and in Hong Kong and Macau, along with seven networks in Japan, four in South Korea and four in Taiwan. It contains 7,419 stations and 417 route records. docs/data_sources.md lists all sources and their licences and rebuild instructions.
+
+## Inclusion criteria & scope of the dataset 
+
+For each citis, the whole urban rail transit is being looked at, what remains are the metro line that statisfy UITP defintion on metro " guided, electrically powered urban passenger service operating on an exclusive197 right of way, with trains comprising at least two cars and having a total capacity of at least 100 passenger" are included (for  line-level inclusion rule, go to docs line  for the line-level inclusion rule. 
+
+
+A line enters a city's network if it passes two tests, and a third attribute is recorded without filtering. T1 is the technology-neutral line criterion of the International Association of Public Transport: a guided, electrically powered passenger railway on an exclusive right of way, with trains of at least two cars and at least one hundred passengers. T2 is membership of the urban rail transit system that the city's own jurisdiction designates, so suburban and commuter railways are excluded as systems and through-running services are truncated at the system boundary. T3 records whether a line is urban or metropolitan in scope. Metropolitan lines stay in the main sample and are removed in a sensitivity sample. The register gives the result of each test for every line, and `docs/inclusion_rule.md` states the rule in full.
+
 
 ## Reference dates
 Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/frequency_sources.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
@@ -37,22 +51,11 @@ Network extent and station sets reflect the networks in operation on 24 Septembe
 | `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report. |
 | `docs/data_dictionary.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
 
-## The inclusion criteria in one paragraph
 
-A line enters a city's network if it passes two tests, and a third attribute is recorded without
-filtering. T1 is the technology-neutral line criterion of the International Association of Public
-Transport: a guided, electrically powered passenger railway on an exclusive right of way, with
-trains of at least two cars and at least one hundred passengers. T2 is membership of the urban rail
-transit system that the city's own jurisdiction designates, so suburban and commuter railways are
-excluded as systems and through-running services are truncated at the system boundary. T3 records
-whether a line is urban or metropolitan in scope. Metropolitan lines stay in the main sample and are
-removed in a sensitivity sample. The register gives the result of each test for every line, and
-`docs/inclusion_rule.md` states the rule in full.
 
 ## Reading a network
 
-Files are NetworkX node-link JSON, one per city, UTF-8, city names as in the file name
-(`Hong Kong-L.json` carries a space, `Ürümqi-L.json` a diacritic).
+Files are NetworkX node-link JSON, one per city, UTF-8, city names as in the file name (`Hong Kong-L.json` carries a space, `Ürümqi-L.json` a diacritic).
 
 ```python
 import json, networkx as nx
@@ -60,11 +63,7 @@ G = nx.node_link_graph(json.load(open("data/l-space/Tokyo-L.json", encoding="utf
 ```
 
 L-space: stations as nodes, in-vehicle links as directed edges with `duration_avg` in seconds.
-P-space: the same stations, one edge for every origin and destination joined by a service without a
-transfer, carrying `veh` (trains per hour by route and direction), `avg_wait` (minutes, half the
-combined headway) and `wait_source`. Every file records in its `graph` attributes its node and link
-counts as published and, where a correction touched it, the correction. Any older totals block
-in a file is superseded by that record.
+P-space: the same stations, one edge for every origin and destination joined by a service without a transfer, carrying `veh` (trains per hour by route and direction), `avg_wait` (minutes, half the combined headway) and `wait_source`. Every file records in its `graph` attributes its node and link counts as published and, where a correction touched it, the correction. Any older totals block in a file is superseded by that record.
 
 ## Conventions
 

@@ -14,7 +14,7 @@ Definitions of metro generally involves the serving area served, right of way, s
 
 Under this criterion, eligible lines must provide guided, electrically powered urban passenger services on an exclusive right of way, using trains comprising at least two cars and having a total capacity of at least 100 passengers per train[^UITP2025].
 
-This criterion accommodates technologies beyond conventional steel-wheel metro. These account for 22 of the 418 included lines across 13 cities:
+Admittedly, applying such concept allow for a more board inclusion and technologies beyond conventional steel-wheel metro or systems that are otherwiselly not using this concpet regarded as seperate mode of urban rail transit systems . These account for 22 of the 418 included lines across 13 cities:
 
 - Straddle monorail: Seven lines in Chongqing (Lines 2 and 3, with an additional branch of Line 3), Wuhu (Lines 1 and 2), Daegu (Line 3) and Tokyo (Tokyo Monorail).
 - Rubber-tyred automated guideway transit and people movers: Yurikamome and the Nippori–Toneri Liner in Tokyo, all three Macau lines, the Wenhu Line in Taipei, Busan Line 4, the Sillim Line in Seoul, and the APM lines in Guangzhou and Shanghai.
@@ -37,7 +37,7 @@ The full selection procedure, including network boundaries and exclusions, is do
 Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by UITP[^UITP2025] and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn[^Vijlbrief2022a][^Vijlbrief2022b]. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
 
 
-## Data source
+## Data source and network construction
 Five collection routes produced the 62 networks. The platform decides how stations, in-vehicle times and frequencies are obtained, so the table is the key to sections 3 and 4.
 
 | Data platrom | City coverage | Raw data | Missing data |

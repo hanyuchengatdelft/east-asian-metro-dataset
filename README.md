@@ -10,11 +10,9 @@ The dataset accompanies the manuscript Accessibility Analysis of East Asian Metr
 In this dataset, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the [United Nations M49 geographical classification](https://unstats.un.org/unsd/methodology/m49/). Within this region, we consider cities with **urban rail transit**, defined here as rail-based public passenger transport serving urban areas ([Vuchic, 2007](https://doi.org/10.1002/9780470168066); [Megna and Bracciali, 2022](https://doi.org/10.1007/s40864-021-00163-6)). Where sufficient data are available, we construct a metro network for each city using only lines that meet both of the following criteria:
 
 ### Criterion 1: Technical requirements
-Definitions of **metro** generally refer to the area served, separation from other traffic, service frequency and passenger capacity. Metro systems typically serve a city or metropolitan area, operate on an exclusive right of way segregated from road and pedestrian traffic, and are designed to carry substantial passenger flows through frequent services.[^APTA2019][^EU2018][^UITP2025]
+Definitions of metro generally involves the serving area served, right of way, service frequency and passenger capacity [^APTA2019][^EU2018][^UITP2025].  In East Asia, however, legal and operational classifications vary across countries and regions [^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
 
-In East Asia, however, legal and operational classifications vary across countries and regions [^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
-
-Under this criterion, eligible lines must provide guided, electrically powered urban passenger services on an exclusive right of way, using trains comprising at least two cars and having a total capacity of at least 100 passengers per train.[^UITP2025]
+Under this criterion, eligible lines must provide guided, electrically powered urban passenger services on an exclusive right of way, using trains comprising at least two cars and having a total capacity of at least 100 passengers per train[^UITP2025].
 
 This criterion accommodates technologies beyond conventional steel-wheel metro. These account for 22 of the 418 included lines across 13 cities:
 
@@ -115,7 +113,6 @@ Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R.
 
 von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public transport networks: Empirical analysis and modeling. *The European Physical Journal B, 68*, 261–275. https://doi.org/10.1140/epjb/e2009-00090-x
 
-Regulation and law
 [^APTA2019]: American Public Transportation Association (APTA). (2019). *[Compendium of Definitions and Acronyms for Rail Systems](https://www.apta.com/wp-content/uploads/2025/10/APTA-Compendium-of-Definitions-Acronyms-for-Rail-Systems.pdf#page=158)*. APTA STD-ADMIN-GL-001-19, 20 June 2019, pp. 158–159, entries "Rail Rapid Transit System" and "Rail rapid (heavy rail transit, rapid rail transit)".
 
 [^EU2018]: European Parliament and Council of the European Union. (2018). *[Regulation (EU) 2018/643 of 18 April 2018 on rail transport statistics (recast)](https://eur-lex.europa.eu/eli/reg/2018/643/oj/eng)*. Article 3(1)(8), definition of "metro".

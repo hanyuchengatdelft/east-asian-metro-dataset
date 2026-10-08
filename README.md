@@ -103,15 +103,6 @@ Network extent and station sets reflect the networks in operation on 24 Septembe
 Data and documentation are released under Creative Commons Attribution 4.0 International, see `LICENSE`. Cite the dataset as set out in `CITATION.cff` and the paper for the analysis. Attribution requirements inherited from individual sources are listed in `docs/data_sources.md` and must be carried over. In particular, work that uses the Tokyo or Yokohama networks must reproduce the attribution sentence of the Public Transportation Open Data Center given there.
 
 ## References
-China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml
-
-UITP. (2025). *Global metro figures 2024* (Statistics Brief). International Association of Public Transport. https://www.uitp.org/wp-content/uploads/sites/7/2025/08/20250822_Global-Metro-Figures_Statistics-Brief_WEB.pdf
-
-Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022a). *A curated data set of L-space representations for 51 metro networks worldwide* (Version 1) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316824.v1
-
-Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022b). *A curated data set of P-space representations for 51 metro networks worldwide* (Version 2) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316950.v2
-
-von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public transport networks: Empirical analysis and modeling. *The European Physical Journal B, 68*, 261–275. https://doi.org/10.1140/epjb/e2009-00090-x
 
 [^APTA2019]: American Public Transportation Association (APTA). (2019). *[Compendium of Definitions and Acronyms for Rail Systems](https://www.apta.com/wp-content/uploads/2025/10/APTA-Compendium-of-Definitions-Acronyms-for-Rail-Systems.pdf#page=158)*. APTA STD-ADMIN-GL-001-19, 20 June 2019, pp. 158–159, entries "Rail Rapid Transit System" and "Rail rapid (heavy rail transit, rapid rail transit)".
 
@@ -126,6 +117,18 @@ von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public tra
 [^KoreaRailroadConstructionAct]: *Railroad Construction Act*. Republic of Korea. See Article 2(4).
 
 [^MLITYardstick]: Ministry of Land, Infrastructure, Transport and Tourism, Japan. Documentation on the yardstick assessment used in railway fare regulation.
+
+China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml
+
+UITP. (2025). *Global metro figures 2024* (Statistics Brief). International Association of Public Transport. https://www.uitp.org/wp-content/uploads/sites/7/2025/08/20250822_Global-Metro-Figures_Statistics-Brief_WEB.pdf
+
+Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022a). *A curated data set of L-space representations for 51 metro networks worldwide* (Version 1) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316824.v1
+
+Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022b). *A curated data set of P-space representations for 51 metro networks worldwide* (Version 2) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316950.v2
+
+von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public transport networks: Empirical analysis and modeling. *The European Physical Journal B, 68*, 261–275. https://doi.org/10.1140/epjb/e2009-00090-x
+
+
 
 
 <!--For Chinese cities, Classification of Urban Rail Transit~(GB/T 44413--2024) provides the technical classification reference~\citep{GBT44413}, while the Provisions on the Operation and Management of Urban Rail Transit establish the administrative framework~\citep{MOTUrbanRail2018}. We retain qualifying lines within municipal urban rail systems and exclude services operating on national railway infrastructure. The Nanjing S-series lines are retained, with their

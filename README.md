@@ -7,6 +7,11 @@ This repository provides metro network data for 62 East Asian cities in two grap
 The dataset accompanies the manuscript Accessibility Analysis of East Asian Metro Systems by Rajat Verma, Hanyu Cheng, and Oded Cats. It is published to support reuse of the data and reproduction of the study’s analyses.
 
 ## Inclusion criteria and scope
+Prior to the actual data collection, it will be first and foremost important to specify the study area. In our study, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the [United Nations M49 geographical classification](https://unstats.un.org/unsd/methodology/m49/).
+
+For each city in the study area, we select metro networks from the networks of broader category of urban rail transit with sufficient data coverage, considered here as all rail-based public passenger transport serving urban areas~\citep{Vuchic2007,MegnaBracciali2022}. Where sufficient data are available, we construct a metro network for each city using only urban rail lines that meet both of the following criteria:
+
+
 In this study, ``East Asia'' refers to the ``Eastern Asia'' subregion (code~030) as defined in the United Nations M49 geographical classification~\citep{UNSD_M49}. For each city in the study area, we select metro networks from the networks of broader category of urban rail transit with sufficient data coverage, considered here as all rail-based public passenger transport serving urban areas~\citep{Vuchic2007,MegnaBracciali2022}. Where sufficient data are available, we construct a metro network for each city using only urban rail lines that meet both of the following criteria:
 
 

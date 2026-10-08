@@ -26,7 +26,13 @@ Restricting the dataset to conventional steel-wheel metro would omit functionall
 
 For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."
 
-In short, we have a boarder concept than the strictly defined metro (subway), however we also draw clear red line to not include any commuter and suburbran railway systems. the veen image for the concept is shown in the image  ![Metro definition: what the dataset includes and excludes](docs/figures/metro_definition_venn.svg) The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
+In short, the dataset use a boder defition to include a few systems that are not conventional steel-wheel metro systems, but explicitly excludes commuter and suburban rail. The diagram below summarises its scope.
+
+![Metro definition: what the dataset includes and excludes](docs/figures/metro_definition_venn.svg)
+
+*Figure 1. Scope of the dataset within urban rail transit. Blue areas indicate included systems while grey areas indicate exclusions.*
+
+The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 
 
 ## Inclusion criteria & scope of the dataset 

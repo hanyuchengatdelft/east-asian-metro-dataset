@@ -49,8 +49,21 @@ Network extent and station sets reflect the networks in operation on 24 Septembe
 | Smallest       | 15 (Dongguan, Macau, Taizhou) | 1 (Dongguan, Taichung, Taizhou, Taoyuan) |
 | Largest        |                414 (Shanghai) |                             28 (Beijing) |
 
+
+## Data source
+Five collection routes produced the 62 networks. The platform decides how stations, in-vehicle times and frequencies are obtained, so the table is the key to sections 3 and 4.
+
+| Data platrom | City coverage | Raw data | Missing data |
+|---|---|---|---|
+| Amap subway service | 45 mainland Chinese networks, Hong Kong, Macau (47) | lines, ordered stations with coordinates and transfer flags, first and last train per station and direction | trips, timetables, headways |
+| Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto, Sapporo (4) | stops, trips, stop times, service calendar | nothing further is needed |
+| Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al. (2022) |
+| KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
+| TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
+
+
   
-## What is in the repository
+## Meta-data
 
 | Path | Content |
 |---|---|

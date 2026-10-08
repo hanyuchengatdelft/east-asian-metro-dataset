@@ -10,8 +10,11 @@ The dataset accompanies the manuscript Accessibility Analysis of East Asian Metr
 In this dataset, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the [United Nations M49 geographical classification](https://unstats.un.org/unsd/methodology/m49/). Within this region, we consider cities with **urban rail transit**, defined here as rail-based public passenger transport serving urban areas ([Vuchic, 2007](https://doi.org/10.1002/9780470168066); [Megna and Bracciali, 2022](https://doi.org/10.1007/s40864-021-00163-6)). Where sufficient data are available, we construct a metro network for each city using only lines that meet both of the following criteria:
 
 ### Criterion 1: Technical requirements
+Definitions of **metro** generally refer to the area served, separation from other traffic, service frequency and passenger capacity. Metro systems typically serve a city or metropolitan area, operate on an exclusive right of way segregated from road and pedestrian traffic, and are designed to carry substantial passenger flows through frequent services.[^APTA2019][^EU2018][^UITP2025]
 
-Drawing on the technical requirements of the International Association of Public Transport (UITP, 2025), we include guided, electrically powered urban passenger services that operate on an exclusive right of way, with trains comprising at least two cars and accommodating at least 100 passengers.
+In East Asia, however, legal and operational classifications vary across countries and regions [^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
+
+Under this criterion, eligible lines must provide guided, electrically powered urban passenger services on an exclusive right of way, using trains comprising at least two cars and having a total capacity of at least 100 passengers per train.[^UITP2025]
 
 This criterion accommodates technologies beyond conventional steel-wheel metro. These account for 22 of the 418 included lines across 13 cities:
 
@@ -19,8 +22,6 @@ This criterion accommodates technologies beyond conventional steel-wheel metro. 
 - Rubber-tyred automated guideway transit and people movers: Yurikamome and the Nippori–Toneri Liner in Tokyo, all three Macau lines, the Wenhu Line in Taipei, Busan Line 4, the Sillim Line in Seoul, and the APM lines in Guangzhou and Shanghai.
 - Rubber-tyred metro with a central guide rail: All three Sapporo subway lines.
 - Medium- and low-speed maglev: Beijing Line S1 and the Changsha Maglev Express.
-
-
 
 Restricting the dataset to conventional steel-wheel metro would omit functionally comparable services. Ten city networks would be represented only partially, while the Macau, Sapporo and Wuhu networks would be excluded entirely.
 
@@ -33,6 +34,10 @@ In short, the dataset use a boder defition to include a few systems that are not
 *Figure 1. Scope of the dataset within urban rail transit. Blue areas indicate included systems while grey areas indicate exclusions.*
 
 The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
+
+### Criterion 2: Not-being suburan or communter rail 
+Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by~\cite{UITP2025} and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn \citep{VijlbriefEtAl2022_Lspace,VijlbriefEtAl2022_Pspace}. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
+
 
 
 ## Inclusion criteria & scope of the dataset 
@@ -127,6 +132,22 @@ Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R.
 Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022b). *A curated data set of P-space representations for 51 metro networks worldwide* (Version 2) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316950.v2
 
 von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public transport networks: Empirical analysis and modeling. *The European Physical Journal B, 68*, 261–275. https://doi.org/10.1140/epjb/e2009-00090-x
+
+Regulation and law
+[^APTA2019]: American Public Transportation Association (APTA). (2019). *[Compendium of Definitions and Acronyms for Rail Systems](https://www.apta.com/wp-content/uploads/2025/10/APTA-Compendium-of-Definitions-Acronyms-for-Rail-Systems.pdf#page=158)*. APTA STD-ADMIN-GL-001-19, 20 June 2019, pp. 158–159, entries "Rail Rapid Transit System" and "Rail rapid (heavy rail transit, rapid rail transit)".
+
+[^EU2018]: European Parliament and Council of the European Union. (2018). *[Regulation (EU) 2018/643 of 18 April 2018 on rail transport statistics (recast)](https://eur-lex.europa.eu/eli/reg/2018/643/oj/eng)*. Article 3(1)(8), definition of "metro".
+
+[^GBT44413]: *Classification of Urban Rail Transit*. GB/T 44413–2024. China.
+
+[^MOTUrbanRail2018]: *Provisions on the Operation and Management of Urban Rail Transit*. Ministry of Transport, China, 2018.
+
+[^KoreaUrbanRailroadAct]: *Urban Railroad Act*. Republic of Korea. See Articles 2(2) and 6(2).
+
+[^KoreaRailroadConstructionAct]: *Railroad Construction Act*. Republic of Korea. See Article 2(4).
+
+[^MLITYardstick]: Ministry of Land, Infrastructure, Transport and Tourism, Japan. Documentation on the yardstick assessment used in railway fare regulation.
+
 
 
 <!--For Chinese cities, Classification of Urban Rail Transit~(GB/T 44413--2024) provides the technical classification reference~\citep{GBT44413}, while the Provisions on the Operation and Management of Urban Rail Transit establish the administrative framework~\citep{MOTUrbanRail2018}. We retain qualifying lines within municipal urban rail systems and exclude services operating on national railway infrastructure. The Nanjing S-series lines are retained, with their

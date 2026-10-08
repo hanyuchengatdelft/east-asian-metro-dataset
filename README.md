@@ -42,9 +42,18 @@ In short, **the dataset use a boder defition to include a few systems that are n
 
 The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 
-
 ## Data source and network construction
-Five collection routes produced the 62 networks. The platform decides how stations, in-vehicle times and frequencies are obtained, so the table is the key to sections 3 and 4.
+The construction of metro networks in L-space and P-space requires at least four types of service-information-related input, regardless of the data source:
+
+1. **Stations:** The set of stations forming each network, identified by their names and geographical coordinates. Each station is represented as a node in both graph representations.
+2. **Service routes:** The ordered sequence of stations served by each line and direction, including branches, short-turn services and distinct operating patterns. These determine the connections between consecutive stations in L-space and the station pairs reachable without a transfer in P-space.
+3. **In-vehicle times:** The travel time between consecutive stations along each route, including the dwell time at the downstream station. These values are assigned to L-space links and used to calculate the in-vehicle time of longer journeys.
+4. **Service frequencies:** The number of services operating along each route and direction, including variations across sections of a line. These determine the frequency of direct connections between station pairs in P-space, from which expected waiting times are derived.
+
+Together, these four components provide the basis for constructing both graph representations. Although in-vehicle time, frequency and waiting time are defined consistently across all 62 networks, the methods used to obtain them depend on the available source data. In the simplest case, a GTFS feed can provide all the necessary inputs. Otherwise, complete train timetables must be compiled by combining supplementary data from multiple sources.
+
+The precise definitions of the graph representations and their attributes are provided in [Notation and what the files store](#notation-and-what-the-files-store) and [Definitions common to every source](#definitions-common-to-every-source).
+
 
 | Data platrom | City coverage | Raw data | Missing data |
 |---|---|---|---|
@@ -54,10 +63,9 @@ Five collection routes produced the 62 networks. The platform decides how statio
 | KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
 | TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
 
-
 This section explains how each of the 62 networks was built from its source. Three kinds of raw material were used: GTFS feeds or timetables converted to GTFS for the Japanese and Korean networks, a JSON API for the Taiwanese networks, and the Amap subway service for the 47 networks of mainland China, Hong Kong and Macau, which is not a timetable and required its own methods. The text first states what every network must contain and the definitions all sources share, then walks through each source from raw data to the two graphs, and closes with what a reader must know before computing with the files and how far the build can be reproduced. `docs/data_dictionary.md` defines every field, `docs/frequency_sources.md` traces every frequency to its source, `docs/dataset_record.md` records the corrections applied to the published files, and `docs/network_construction_by_city.csv` holds the per-network table below as data.
 
-### The build in brief
+### Essential inputs and data requirement
 
 Each point is explained in the subsection named in brackets.
 
@@ -72,7 +80,6 @@ Each point is explained in the subsection named in brackets.
 9. **Frequency and waiting time.** Weekday services between 05:00 and 24:00 divided by 19 hours, on every network. The waiting time is half the combined headway of all route records serving the pair, $w_{ij}=30/\sum f$. Amap gives no frequency, so the Chinese, Hong Kong and Macau frequencies are transcribed from published interval statements in a fixed order of preference, with a bounded fallback whose share is published per route (Definitions common to every source, Building the Amap networks).
 10. **Direction.** Both spaces are directed and both directions of every link and pair are stored. Combining them into one undirected value is a choice of the analysis, not a property of the files (Notation and what the files store, Properties to know before computing with the files).
 11. **Travel time.** P-space stores no in-vehicle time. The in-vehicle time of a direct pair is the shortest sum of link times along a route record serving it, and the generalised travel time of a journey adds weighted waiting time and a transfer penalty, with the weights of the accompanying paper (Travel time from the files).
-12. **File properties.** 32 P-space files hold more than one record for some ordered pairs and a plain loader keeps the last, `d` and `n_vehicles` are schema placeholders, and `original_ids` carries no information (Properties to know before computing with the files).
 
 ### Notation and what the files store
 
@@ -136,7 +143,7 @@ Five collection routes produced the 62 networks. The platform decides how statio
 | Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto, Sapporo (4) | stops, trips, stop times, service calendar | nothing further is needed |
 | Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al.[^Vijlbrief2022a] |
 | KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
-| TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
+| TDX Rail/Metro API | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
 
 In every case the network extent is the one in operation on 24 September 2025 and service statements are admitted only if published on or before 30 September 2025 (`docs/dataset_record.md`).
 
@@ -189,10 +196,6 @@ Twenty-four mainland routes have no admissible published statement and keep the 
 **Verification and correction, August to October 2026.** The same information was captured again for all 47 networks between 21 and 23 August 2026 and archived with SHA-256 hashes, and the station sets were cross-checked against CPTOND-2025[^Wang2026], an independent dataset built from the same Amap source in June 2025 that covers 44 of the 47 networks. Of the stations in those 44 networks 97.0 percent matched a CPTOND station by name, the median position difference was 0.1 m, and every unmatched station lay on a line opened after CPTOND's collection. Each file lists the operations applied to it, by label, under `graph.repairs`. The corrections of September and October 2026 are recorded with their grounds and station effects in `docs/dataset_record.md`. The counts of the August 2026 repairs given next come from the build report of the companion repository and are not yet part of the public record. In summary: 258 station positions in 24 networks were corrected where the 2025 position disagreed with both the 2026 capture and CPTOND (the previous position is kept on the node as `v1_lat`, `v1_lon`), 66 self-loop links left by the name merge were removed, 18 Beijing tram stops that the inclusion rule excludes were removed, two route records that the 2025 compilation had stored as one were split on the Amap line sequences (Nantong Line 2, Guangzhou Line 3 branch and Line 13), P-space records with no directed L-space path on their route were removed, two lines open at the reference date but absent from the compilation were added from the 2026 capture (Ningbo Line 7, the Shanghai Airport Link Line, their 22 stations carry `added_line`, `amap_station_id` and `coord_source`), and the September 2026 corrections of `docs/dataset_record.md` were applied. A changed value always sits next to the value it replaced (`v1_id`, `v1_lat`, `v1_lon`, `v1_duration_avg`, `v1_avg_wait`).
 
 **Hong Kong and Macau** are carried by the same map service and were compiled the same way. Their frequencies come from the operators' own pages, the MTR service-hours page in its capture of 20 September 2025 and the Macao LRT route page of 25 August 2025.
-
-#### Terms of use, and what this repository circulates
-
-**Terms of use, and what this repository circulates.** The Amap Open Platform service agreement (高德地图开放平台服务协议, version of 3 December 2025) reserves to Amap the ownership of the content its services return, public transport data included (clauses 2.2 and 7.1), and does not allow that content to be stored, cached or retrieved by technical means (3.5, 4.12.3), copied, redistributed or made into derivative works or databases (4.12.2, 4.12.7, 7.3). It grants individuals a free quota for personal study and research (3.1) and invites non-commercial users to apply for a cooperation arrangement (3.2.5), but contains no general academic exemption. The consumer terms of the map site (高德服务条款, version of 30 September 2026) carry the same prohibitions on crawling and on storing or passing map data to third parties. The authors therefore hold the archived captures and their hash manifest privately and do not republish any response, and what this repository circulates is the derived representation only: station names and positions, line membership and station order, and the in-vehicle times, frequencies and waiting times estimated as described in the two subsections above. This is the posture of the published precedent CPTOND-2025[^Wang2026], a station and line dataset for 46 Chinese city units built from the same Amap source and released under CC BY 4.0, and of the 4TU.ResearchData deposit of these networks. Reproducibility, below, says what it means for reproduction.
 
 ### Building the GTFS networks (Japan and Korea)
 
@@ -338,7 +341,7 @@ What a reader can and cannot re-run from public material:
 - The GTFS-based networks can be rebuilt from the operator feeds, which the operators publish, and from the converted Sendai, Kobe and Fukuoka timetables, whose sources are public (the converted feeds themselves are not redistributed).
 - The Korean networks need the KTDB feed, which is obtained from the Korea Transport Database under its terms.
 - The Taiwanese networks can be rebuilt from TDX with a registered key. Live responses may differ from the archived capture of August 2026, which carries no version field.
-- The Chinese networks cannot be rebuilt from this repository alone, because the Amap captures may not be redistributed and the live service drifts. The archived captures, with their hash manifest, are held by the authors. The script of the 2025 compilation was not retained. Its method is documented under first- and last-train progression above and reproduced by the 2026 estimator on the archived Shanghai capture at a median difference of 0.0 minutes.
+- The Mainland Chinese, Hong Kongese and Macauese networks cannot be rebuilt from this repository alone, because the Amap captures may not be redistributed and the live service drifts. The archived captures, with their hash manifest, are held by the authors. The script of the 2025 compilation was not retained. Its method is documented under first- and last-train progression above and reproduced by the 2026 estimator on the archived Shanghai capture at a median difference of 0.0 minutes.
 - Every frequency statement behind the Chinese networks is cited with URL and date in `docs/frequency_sources.md`, and the transcribed rows are in the companion repository.
 
 
@@ -354,16 +357,6 @@ G = nx.node_link_graph(json.load(open("data/l-space/Tokyo-L.json", encoding="utf
 L-space: stations as nodes, in-vehicle links as directed edges with `duration_avg` in seconds.
 P-space: the same stations, one edge for every origin and destination joined by a service without a transfer, carrying `veh` (trains per hour by route and direction), `avg_wait` (minutes, half the combined headway) and `wait_source`. Every file records in its `graph` attributes its node and link counts as published and, where a correction touched it, the correction. Any older totals block in a file is superseded by that record.
 
-## Conventions
-
-An in-vehicle link time is measured departure to departure, so it includes the dwell at the far end. A frequency is the number of weekday services between 05:00 and 24:00 divided by nineteen hours, and the waiting time is half the resulting headway. Coordinates are WGS-84 throughout.
-
-## Data sources
-The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al.[^Vijlbrief2022a]. `docs/data_sources.md` names every source with its licence, and `docs/frequency_sources.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
-
-## Every network is a single component
-
-Since the corrections of 15 September 2026 every published network is one connected component. The nine-station northern section of Foshan Line 3, not physically joined to the rest of the network at the reference date, is not represented in the files, and the register says so on its row. The grounds are recorded in `docs/dataset_record.md`.
 
 ## Meta-data
 
@@ -378,18 +371,6 @@ Since the corrections of 15 September 2026 every published network is one connec
 | `docs/inclusion_rule.md` | The full statement of the inclusion rule, with the instrument used in each jurisdiction and the counts it produces. |
 | `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report[^CAMET2025]. |
 | `docs/data_dictionary.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
-
-## Reference dates
-Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/frequency_sources.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
-
-## Scale
-|                |                      Stations |                            Route records |
-|----------------|-------------------------------|------------------------------------------|
-| Total          |                         7,419 |                                      417 |
-| Median network |                            90 |                                        4 |
-| Quartiles      |                    38 and 188 |                                 2 and 10 |
-| Smallest       | 15 (Dongguan, Macau, Taizhou) | 1 (Dongguan, Taichung, Taizhou, Taoyuan) |
-| Largest        |                414 (Shanghai) |                             28 (Beijing) |
 
 ## Licence and citation
 

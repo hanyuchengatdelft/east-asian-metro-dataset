@@ -22,12 +22,12 @@ Under this criterion, eligible lines must provide guided, electrically powered u
 
 Adopting this broad definition allows us to include technologies beyond conventional steel-wheel metro. These account for 22 of the 418 included lines across 13 cities:
 
-- Straddle monorail: Seven lines in Chongqing (Lines 2 and 3, with an additional branch of Line 3), Wuhu (Lines 1 and 2), Daegu (Line 3) and Tokyo (Tokyo Monorail).
-- Rubber-tyred automated guideway transit and people movers: Yurikamome and the Nippori–Toneri Liner in Tokyo, all three Macau lines, the Wenhu Line in Taipei, Busan Line 4, the Sillim Line in Seoul, and the APM lines in Guangzhou and Shanghai.
-- Rubber-tyred metro with a central guide rail: All three Sapporo subway lines.
-- Medium- and low-speed maglev: Beijing Line S1 and the Changsha Maglev Express.
+- Straddle monorail (7) : Seven lines in Chongqing (Lines 2 and 3, with an additional branch of Line 3), Wuhu (Lines 1 and 2), Daegu (Line 3) and Tokyo (Tokyo Monorail).
+- Rubber-tyred automated guideway transit and people movers (10): Yurikamome and the Nippori–Toneri Liner in Tokyo, all three Macau lines, the Wenhu Line in Taipei, Busan Line 4, the Sillim Line in Seoul, and the APM lines in Guangzhou and Shanghai.
+- Rubber-tyred metro with a central guide rail (3): All three Sapporo subway lines.
+- Medium- and low-speed maglev (2): Beijing Line S1 and the Changsha Maglev Express.
 
-Restricting the dataset to conventional steel-wheel metro would omit functionally comparable services. Ten city networks would be represented only partially, while the Macau, Sapporo and Wuhu networks would be excluded entirely.
+Restricting the dataset to conventional steel-wheel metro would omit functionally comparable services. Ten city networks would be represented only partially, while the Macau, Sapporo and Wuhu networks would be excluded entirely. This adds another reason for the adoption of a boarder concept.
 
 For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."[^UITP2025]
 

@@ -15,8 +15,8 @@ The dataset accompanies the manuscript Accessibility Analysis of East Asian Metr
 ## Inclusion criteria and scope
 In this dataset, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the United Nations M49 geographical classification[^UNM49]. Within this region, we consider cities with **urban rail transit**, defined here as rail-based public passenger transport serving urban areas[^Vuchic2007][^MegnaBracciali2022]. Where sufficient data are available, we construct a metro network for each city using only lines that meet both of the following criteria:
 
-### Criterion 1: Technical requirements
-Definitions of metro generally involves the serving area served, right of way, service frequency and passenger capacity[^APTA2019][^EU2018][^UITP2025]. In East Asia, however, legal and operational classifications vary across countries and regions[^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
+### Criterion 1: Functional and operational requirements
+In Europe and United States, definitions of metro generally involves the serving area served, right of way, service frequency and passenger capacity[^APTA2019][^EU2018]. In East Asia, however, legal and operational classifications vary across countries and regions[^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
 
 Under this criterion, eligible lines must provide guided, electrically powered urban passenger services on an exclusive right of way, using trains comprising at least two cars and having a total capacity of at least 100 passengers per train[^UITP2025].
 
@@ -31,7 +31,10 @@ Restricting the dataset to conventional steel-wheel metro would omit functionall
 
 For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."[^UITP2025]
 
-In short, the dataset use a boder defition to include a few systems that are not conventional steel-wheel metro systems, but explicitly excludes commuter and suburban rail. The diagram below summarises its scope.
+### Criterion 2: Exclusion of suburban and commuter rail
+Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by UITP[^UITP2025] and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn[^Vijlbrief2022a][^Vijlbrief2022b]. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
+
+In short, **the dataset use a boder defition to include a few systems that are not conventional steel-wheel metro systems, but explicitly excludes commuter and suburban rail**. The diagram below summarises its scope.
 
 ![Metro definition: what the dataset includes and excludes](docs/figures/metro_definition_venn.svg)
 
@@ -39,8 +42,6 @@ In short, the dataset use a boder defition to include a few systems that are not
 
 The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 
-### Criterion 2: Not-being suburan or communter rail 
-Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by UITP[^UITP2025] and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn[^Vijlbrief2022a][^Vijlbrief2022b]. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
 
 ## Data source and network construction
 Five collection routes produced the 62 networks. The platform decides how stations, in-vehicle times and frequencies are obtained, so the table is the key to sections 3 and 4.

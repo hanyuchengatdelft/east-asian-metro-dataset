@@ -2,15 +2,15 @@
 
 ## Summary
 
-This repository provides metro network data for 62 East Asian cities in two graph representations, namely the L-space and P-space (von Ferber et al., 2009). Both representations use stations as nodes. In L-space, a link connects two stations that are consecutive stops on at least one route. In P-space, a link connects two stations served by at least one common route, representing travel without a transfer, regardless of the number of intermediate stops.
+This repository provides metro network data for 62 East Asian cities in two graph representations, namely the L-space and P-space[^vonFerber2009]. Both representations use stations as nodes. In L-space, a link connects two stations that are consecutive stops on at least one route. In P-space, a link connects two stations served by at least one common route, representing travel without a transfer, regardless of the number of intermediate stops.
 
 The dataset accompanies the manuscript Accessibility Analysis of East Asian Metro Systems by Rajat Verma, Hanyu Cheng, and Oded Cats. It is published to support reuse of the data and reproduction of the study’s analyses.
 
 ## Inclusion criteria and scope
-In this dataset, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the [United Nations M49 geographical classification](https://unstats.un.org/unsd/methodology/m49/). Within this region, we consider cities with **urban rail transit**, defined here as rail-based public passenger transport serving urban areas ([Vuchic, 2007](https://doi.org/10.1002/9780470168066); [Megna and Bracciali, 2022](https://doi.org/10.1007/s40864-021-00163-6)). Where sufficient data are available, we construct a metro network for each city using only lines that meet both of the following criteria:
+In this dataset, **East Asia** refers to the “Eastern Asia” subregion (code 030) in the United Nations M49 geographical classification[^UNM49]. Within this region, we consider cities with **urban rail transit**, defined here as rail-based public passenger transport serving urban areas[^Vuchic2007][^MegnaBracciali2022]. Where sufficient data are available, we construct a metro network for each city using only lines that meet both of the following criteria:
 
 ### Criterion 1: Technical requirements
-Definitions of metro generally involves the serving area served, right of way, service frequency and passenger capacity [^APTA2019][^EU2018][^UITP2025].  In East Asia, however, legal and operational classifications vary across countries and regions [^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
+Definitions of metro generally involves the serving area served, right of way, service frequency and passenger capacity[^APTA2019][^EU2018][^UITP2025]. In East Asia, however, legal and operational classifications vary across countries and regions[^GBT44413][^MOTUrbanRail2018][^KoreaUrbanRailroadAct][^KoreaRailroadConstructionAct][^MLITYardstick]. To ensure a consistent approach across the study area, we apply a common technical criterion based on the broad statistical definition of the International Association of Public Transport (UITP), alongside jurisdiction-specific rules for defining network boundaries.
 
 Under this criterion, eligible lines must provide guided, electrically powered urban passenger services on an exclusive right of way, using trains comprising at least two cars and having a total capacity of at least 100 passengers per train[^UITP2025].
 
@@ -23,7 +23,7 @@ This criterion accommodates technologies beyond conventional steel-wheel metro. 
 
 Restricting the dataset to conventional steel-wheel metro would omit functionally comparable services. Ten city networks would be represented only partially, while the Macau, Sapporo and Wuhu networks would be excluded entirely.
 
-For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."
+For each city, we review the lines within its designated urban rail transit system. Included lines must meet UITP’s metro criteria, namely "guided, electrically powered urban passenger services operating on an exclusive right of way, with trains of at least two cars and a total capacity of at least 100 passengers."[^UITP2025]
 
 In short, the dataset use a boder defition to include a few systems that are not conventional steel-wheel metro systems, but explicitly excludes commuter and suburban rail. The diagram below summarises its scope.
 
@@ -34,7 +34,7 @@ In short, the dataset use a boder defition to include a few systems that are not
 The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 
 ### Criterion 2: Not-being suburan or communter rail 
-Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by~\cite{UITP2025} and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn \citep{VijlbriefEtAl2022_Lspace,VijlbriefEtAl2022_Pspace}. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
+Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by UITP[^UITP2025] and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn[^Vijlbrief2022a][^Vijlbrief2022b]. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
 
 
 ## Data source
@@ -44,7 +44,7 @@ Five collection routes produced the 62 networks. The platform decides how statio
 |---|---|---|---|
 | Amap subway service | 45 mainland Chinese networks, Hong Kong, Macau (47) | lines, ordered stations with coordinates and transfer flags, first and last train per station and direction | trips, timetables, headways |
 | Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto, Sapporo (4) | stops, trips, stop times, service calendar | nothing further is needed |
-| Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al. (2022) |
+| Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al.[^Vijlbrief2022a] |
 | KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
 | TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
 
@@ -66,7 +66,7 @@ P-space: the same stations, one edge for every origin and destination joined by 
 An in-vehicle link time is measured departure to departure, so it includes the dwell at the far end. A frequency is the number of weekday services between 05:00 and 24:00 divided by nineteen hours, and the waiting time is half the resulting headway. Coordinates are WGS-84 throughout.
 
 ## Data sources
-The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al. (2022). `docs/data_sources.md` names every source with its licence, and `docs/frequency_sources.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
+The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al.[^Vijlbrief2022a]. `docs/data_sources.md` names every source with its licence, and `docs/frequency_sources.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
 
 ## Every network is a single component
 
@@ -83,7 +83,7 @@ Since the corrections of 15 September 2026 every published network is one connec
 | `docs/dataset_record.md` | The record of the published files: the reference dates, the totals, every correction with its grounds and its effect on the station counts, and the provenance of the corrected values. |
 | `docs/data_sources.md` | Every source behind the files, its licence, and the attribution it requires. |
 | `docs/inclusion_rule.md` | The full statement of the inclusion rule, with the instrument used in each jurisdiction and the counts it produces. |
-| `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report. |
+| `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report[^CAMET2025]. |
 | `docs/data_dictionary.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
 
 ## Reference dates
@@ -102,32 +102,37 @@ Network extent and station sets reflect the networks in operation on 24 Septembe
 
 Data and documentation are released under Creative Commons Attribution 4.0 International, see `LICENSE`. Cite the dataset as set out in `CITATION.cff` and the paper for the analysis. Attribution requirements inherited from individual sources are listed in `docs/data_sources.md` and must be carried over. In particular, work that uses the Tokyo or Yokohama networks must reproduce the attribution sentence of the Public Transportation Open Data Center given there.
 
-## References
+<!-- References. Every source cited above is a numbered footnote; GitHub renders the list at the foot of the page. Order follows first citation. -->
 
-[^APTA2019]: American Public Transportation Association (APTA). (2019). *[Compendium of Definitions and Acronyms for Rail Systems](https://www.apta.com/wp-content/uploads/2025/10/APTA-Compendium-of-Definitions-Acronyms-for-Rail-Systems.pdf#page=158)*. APTA STD-ADMIN-GL-001-19, 20 June 2019, pp. 158–159, entries "Rail Rapid Transit System" and "Rail rapid (heavy rail transit, rapid rail transit)".
+[^vonFerber2009]: von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public transport networks: Empirical analysis and modeling. *The European Physical Journal B, 68*, 261–275. https://doi.org/10.1140/epjb/e2009-00090-x
 
-[^EU2018]: European Parliament and Council of the European Union. (2018). *[Regulation (EU) 2018/643 of 18 April 2018 on rail transport statistics (recast)](https://eur-lex.europa.eu/eli/reg/2018/643/oj/eng)*. Article 3(1)(8), definition of "metro".
+[^UNM49]: United Nations Statistics Division. (n.d.). *Standard country or area codes for statistical use (M49)*. United Nations. https://unstats.un.org/unsd/methodology/m49/
 
-[^GBT44413]: *Classification of Urban Rail Transit*. GB/T 44413–2024. China.
+[^Vuchic2007]: Vuchic, V. R. (2007). *Urban transit systems and technology*. John Wiley & Sons. https://doi.org/10.1002/9780470168066
 
-[^MOTUrbanRail2018]: *Provisions on the Operation and Management of Urban Rail Transit*. Ministry of Transport, China, 2018.
+[^MegnaBracciali2022]: Megna, G., & Bracciali, A. (2022). Technical comparison of commercially available trams and review of standardization frame and design principles. *Urban Rail Transit, 8*, 16–31. https://doi.org/10.1007/s40864-021-00163-6
 
-[^KoreaUrbanRailroadAct]: *Urban Railroad Act*. Republic of Korea. See Articles 2(2) and 6(2).
+[^APTA2019]: American Public Transportation Association (APTA). (2019). *Compendium of definitions and acronyms for rail systems* (APTA STD-ADMIN-GL-001-19, 20 June 2019), pp. 158–159, entries "Rail Rapid Transit System" and "Rail rapid (heavy rail transit, rapid rail transit)". https://www.apta.com/wp-content/uploads/2025/10/APTA-Compendium-of-Definitions-Acronyms-for-Rail-Systems.pdf#page=158
 
-[^KoreaRailroadConstructionAct]: *Railroad Construction Act*. Republic of Korea. See Article 2(4).
+[^EU2018]: European Parliament and Council of the European Union. (2018). *Regulation (EU) 2018/643 of 18 April 2018 on rail transport statistics (recast)*, Article 3(1)(8), definition of "metro". https://eur-lex.europa.eu/eli/reg/2018/643/oj/eng
 
-[^MLITYardstick]: Ministry of Land, Infrastructure, Transport and Tourism, Japan. Documentation on the yardstick assessment used in railway fare regulation.
+[^UITP2025]: UITP. (2025). *Global metro figures 2024* (Statistics Brief). International Association of Public Transport. https://www.uitp.org/wp-content/uploads/sites/7/2025/08/20250822_Global-Metro-Figures_Statistics-Brief_WEB.pdf
 
-China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml
+[^GBT44413]: Standardization Administration of China. (2024). *Classification of urban rail transit* (城市轨道交通分类), GB/T 44413–2024. State Administration for Market Regulation and Standardization Administration of China. Published 23 August 2024, effective 1 December 2024. https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=5ACDACDEDD662B962D8A61E3530814F7
 
-UITP. (2025). *Global metro figures 2024* (Statistics Brief). International Association of Public Transport. https://www.uitp.org/wp-content/uploads/sites/7/2025/08/20250822_Global-Metro-Figures_Statistics-Brief_WEB.pdf
+[^MOTUrbanRail2018]: Ministry of Transport of the People's Republic of China. (2018). *Provisions on the operation and management of urban rail transit* (城市轨道交通运营管理规定), Order No. 8 of 2018, effective 1 July 2018. State Council Gazette. https://www.gov.cn/gongbao/content/2018/content_5313920.htm
 
-Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022a). *A curated data set of L-space representations for 51 metro networks worldwide* (Version 1) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316824.v1
+[^KoreaUrbanRailroadAct]: Republic of Korea. (2024). *Urban Railroad Act* (도시철도법), as amended by Act No. 19987 of 9 January 2024. Korea Law Translation Center, Korea Legislation Research Institute. See Articles 2(2) and 6(2). https://elaw.klri.re.kr/eng_mobile/viewer.do?hseq=64594&key=4&type=sogan
 
-Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022b). *A curated data set of P-space representations for 51 metro networks worldwide* (Version 2) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316950.v2
+[^KoreaRailroadConstructionAct]: Republic of Korea. (2025). *Act on Railroad Construction and Railroad Facilities Management*. Korea Law Translation Center, Korea Legislation Research Institute. See Article 2(4). https://elaw.klri.re.kr/eng_mobile/viewer.do?hseq=72778&key=41&type=part
 
-von Ferber, C., Holovatch, T., Holovatch, Y., & Palchykov, V. (2009). Public transport networks: Empirical analysis and modeling. *The European Physical Journal B, 68*, 261–275. https://doi.org/10.1140/epjb/e2009-00090-x
+[^MLITYardstick]: Ministry of Land, Infrastructure, Transport and Tourism, Railway Bureau. (n.d.). *The railway fare and charge system: The yardstick method* (explanatory document, in Japanese, title translated). https://www.soumu.go.jp/main_content/000973903.pdf
 
+[^Vijlbrief2022a]: Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022a). *A curated data set of L-space representations for 51 metro networks worldwide* (Version 1) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316824.v1
+
+[^Vijlbrief2022b]: Vijlbrief, S., Cats, O., Krishnakumari, P., van Cranenburgh, S., & Massobrio, R. (2022b). *A curated data set of P-space representations for 51 metro networks worldwide* (Version 2) [Data set]. 4TU.ResearchData. https://doi.org/10.4121/21316950.v2
+
+[^CAMET2025]: China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml
 
 
 
@@ -140,3 +145,4 @@ so line-level boundaries are documentable. Suburban services are excluded on two
 In Japan, no statute defines a subway as a service category, so the boundary is the ministry's own classification of undertakings. Fare regulation under Article~16(2) of the Railway Business Act places operators in three peer groups, the JR passenger companies, the major private railways and the subway undertakings~\citep{MLITYardstick}, and the ministry's railway statistics enumerate the subway undertakings with route length and stations per subway business~\citep{MLITRailwayStatistics2023}. The dataset covers that group. Tokyo Metro is constituted by its own Act to operate railways mainly underground in and around the special wards \citep{TokyoMetroAct}, whereas JR East is allocated the Tohoku and Kanto regions rather than a city~\citep{JNRReformAct1986}. Through-running services are represented only over the retained undertaking's own sections~\citep{Ito2014ThroughService}, so the Tozai Line runs from Nakano to Nishi-Funabashi, following Tokyo Metro's operating-line inventory \citep{TokyoMetroOperatingLines}. The Yurikamome, the Nippori--Toneri Liner and the Tokyo Monorail are elevated lines outside every subway roster and are retained on the functional criterion alone.
 
 These  Seven are straddle monorail routes, in Chongqing (Lines 2 and 3, the latter with an additional branch), Wuhu (Lines 1 and 2), Daegu (Line 3) and Tokyo (the Tokyo Monorail). Ten are rubber-tyred automated guideway transit or people-mover lines, namely the Yurikamome and Nippori--Toneri Liner in Tokyo, all three Macau lines, the Wenhu Line in Taipei, Busan Line 4, the Sillim Line in Seoul, and the APM lines in Guangzhou and Shanghai. Three are the rubber-tyred lines with a central guide rail that make up the whole Sapporo subway, and two are medium-low-speed maglev services (Beijing Line S1 and the Changsha Maglev Express). Restricting inclusion to conventional steel-wheel lines would omit functionally comparable services and underrepresent metro-equivalent provision in the affected cities. Ten networks would be represented only in part, and the Macau, Sapporo and Wuhu networks would be excluded entirely.
+-->

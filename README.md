@@ -39,28 +39,6 @@ The full selection procedure, including network boundaries and exclusions, is do
 Functional requirements alone are insufficient to define the entry requirement thoroughly, as suburban and commuter rail services may also meet them, which is of particular relevance in Tokyo and Seoul. The second criterion therefore uses the relevant legislation and official classifications in each jurisdiction to identify the urban rail systems included in the dataset, with line-level boundaries established from official planning and operating records. Suburban and commuter rail are excluded, consistent with definition of metro concept defined by~\cite{UITP2025} and the European and North American datasets, which omit services such as the Paris RER and Berlin S-Bahn \citep{VijlbriefEtAl2022_Lspace,VijlbriefEtAl2022_Pspace}. Including these services only in East Asia would introduce inconsistent network coverage and could exaggerate the observed regional differences. 
 
 
-
-## Inclusion criteria & scope of the dataset 
-
-For each citis, the whole urban rail transit is being looked at, what remains are the metro line that statisfy UITP defintion on metro " guided, electrically powered urban passenger service operating on an exclusive197 right of way, with trains comprising at least two cars and having a total capacity of at least 100 passenger" are included (for  line-level inclusion rule, go to docs line  for the line-level inclusion rule. 
-
-
-A line enters a city's network if it passes two tests, and a third attribute is recorded without filtering. T1 is the technology-neutral line criterion of the International Association of Public Transport: a guided, electrically powered passenger railway on an exclusive right of way, with trains of at least two cars and at least one hundred passengers. T2 is membership of the urban rail transit system that the city's own jurisdiction designates, so suburban and commuter railways are excluded as systems and through-running services are truncated at the system boundary. T3 records whether a line is urban or metropolitan in scope. Metropolitan lines stay in the main sample and are removed in a sensitivity sample. The register gives the result of each test for every line, and `docs/inclusion_rule.md` states the rule in full.
-
-
-## Reference dates
-Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/frequency_sources.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
-
-## Scale
-|                |                      Stations |                            Route records |
-|----------------|-------------------------------|------------------------------------------|
-| Total          |                         7,419 |                                      417 |
-| Median network |                            90 |                                        4 |
-| Quartiles      |                    38 and 188 |                                 2 and 10 |
-| Smallest       | 15 (Dongguan, Macau, Taizhou) | 1 (Dongguan, Taichung, Taizhou, Taoyuan) |
-| Largest        |                414 (Shanghai) |                             28 (Beijing) |
-
-
 ## Data source
 Five collection routes produced the 62 networks. The platform decides how stations, in-vehicle times and frequencies are obtained, so the table is the key to sections 3 and 4.
 
@@ -71,23 +49,6 @@ Five collection routes produced the 62 networks. The platform decides how statio
 | Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al. (2022) |
 | KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
 | TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
-
-
-  
-## Meta-data
-
-| Path | Content |
-|---|---|
-| `data/l-space/` | **The 62 networks in L-space, 7,419 stations.** Stations as nodes, in-vehicle links as directed edges. In-vehicle times and frequencies rebuilt from operator timetables and published interval statements, with the corrections listed in `docs/dataset_record.md` applied. This is what the manuscript reports. |
-| `data/p-space/` | The same 62 networks in P-space: one edge for every origin and destination joined by a service without a transfer, carrying the frequency, the waiting time and its source. |
-| `data/route_information.csv` | **The line-level inclusion register**, 420 rows, one per route record. For every line: city, local and English name, operator, system type, legal class, service type, station count, great-circle length, commercial speed proxy, trains per hour, headway and its source, the share of the service day filled rather than published, the outcome of the three tests (`T1_uitp_line_criteria`, `T2_designated_urban_system`, `T3_scope` with `T3_basis`), the fare flag and the verdict. 418 rows are included and 2 are excluded. |
-| `data/route_frequency_sources.csv` | The per-route table behind the frequencies: for every route, the data source of its frequency and each URL and date the value was read from. It holds 417 rows, the register's 420 less the 2 excluded lines and the 1 included line that is not represented in the network files. |
-| `docs/dataset_record.md` | The record of the published files: the reference dates, the totals, every correction with its grounds and its effect on the station counts, and the provenance of the corrected values. |
-| `docs/data_sources.md` | Every source behind the files, its licence, and the attribution it requires. |
-| `docs/inclusion_rule.md` | The full statement of the inclusion rule, with the instrument used in each jurisdiction and the counts it produces. |
-| `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report. |
-| `docs/data_dictionary.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
-
 
 
 ## Reading a network
@@ -104,19 +65,40 @@ P-space: the same stations, one edge for every origin and destination joined by 
 
 ## Conventions
 
-An in-vehicle link time is measured departure to departure, so it includes the dwell at the far
-end. A frequency is the number of weekday services between 05:00 and 24:00 divided by nineteen
-hours, and the waiting time is half the resulting headway. Coordinates are WGS-84 throughout.
+An in-vehicle link time is measured departure to departure, so it includes the dwell at the far end. A frequency is the number of weekday services between 05:00 and 24:00 divided by nineteen hours, and the waiting time is half the resulting headway. Coordinates are WGS-84 throughout.
 
 ## Data sources
 The 47 Chinese networks, including Hong Kong and Macau, were compiled from the Amap subway service, with in-vehicle times read from first- and last-train progressions and frequencies transcribed from the interval statements operators publish. The Korean networks come from the national GTFS release of the Korea Transport Database, the Japanese networks from the operators' GTFS feeds or published timetables, the Chinese Taipei networks from the Transport Data eXchange, and Kobe's station set from Vijlbrief et al. (2022). `docs/data_sources.md` names every source with its licence, and `docs/frequency_sources.md` traces every frequency to the statement, feed or table it was read from. The transcribed interval statements, the annotated networks with full provenance blocks, and the code that builds everything are in the companion repository `https://github.com/hanyuchengatdelft/east-asian-metro-accessibility`.
 
 ## Every network is a single component
 
-Since the corrections of 15 September 2026 every published network is one connected component. The
-nine-station northern section of Foshan Line 3, not physically joined to the rest of the network at
-the reference date, is not represented in the files, and the register says so on its row. The
-grounds are recorded in `docs/dataset_record.md`.
+Since the corrections of 15 September 2026 every published network is one connected component. The nine-station northern section of Foshan Line 3, not physically joined to the rest of the network at the reference date, is not represented in the files, and the register says so on its row. The grounds are recorded in `docs/dataset_record.md`.
+
+## Meta-data
+
+| Path | Content |
+|---|---|
+| `data/l-space/` | **The 62 networks in L-space, 7,419 stations.** Stations as nodes, in-vehicle links as directed edges. In-vehicle times and frequencies rebuilt from operator timetables and published interval statements, with the corrections listed in `docs/dataset_record.md` applied. This is what the manuscript reports. |
+| `data/p-space/` | The same 62 networks in P-space: one edge for every origin and destination joined by a service without a transfer, carrying the frequency, the waiting time and its source. |
+| `data/route_information.csv` | **The line-level inclusion register**, 420 rows, one per route record. For every line: city, local and English name, operator, system type, legal class, service type, station count, great-circle length, commercial speed proxy, trains per hour, headway and its source, the share of the service day filled rather than published, the outcome of the three tests (`T1_uitp_line_criteria`, `T2_designated_urban_system`, `T3_scope` with `T3_basis`), the fare flag and the verdict. 418 rows are included and 2 are excluded. |
+| `data/route_frequency_sources.csv` | The per-route table behind the frequencies: for every route, the data source of its frequency and each URL and date the value was read from. It holds 417 rows, the register's 420 less the 2 excluded lines and the 1 included line that is not represented in the network files. |
+| `docs/dataset_record.md` | The record of the published files: the reference dates, the totals, every correction with its grounds and its effect on the station counts, and the provenance of the corrected values. |
+| `docs/data_sources.md` | Every source behind the files, its licence, and the attribution it requires. |
+| `docs/inclusion_rule.md` | The full statement of the inclusion rule, with the instrument used in each jurisdiction and the counts it produces. |
+| `docs/frequency_sources.md` | Where every frequency and headway comes from, network by network and route by route, with the URL and date of each statement and the validation against the CAMET 2025 annual report. |
+| `docs/data_dictionary.md` | The meaning of every node, link and graph field. It was written for the annotated networks of the companion repository, whose node and link fields are the same as here. |
+
+## Reference dates
+Network extent and station sets reflect the networks in operation on 24 September 2025. Service statements were included only if published on or before 30 September 2025. Where service information from the reference period was unavailable, the best available feed or timetable was used, as documented for each network in `docs/frequency_sources.md`. The main cases are the March 2023 Korean national feed and Sapporo's 2020 timetable.
+
+## Scale
+|                |                      Stations |                            Route records |
+|----------------|-------------------------------|------------------------------------------|
+| Total          |                         7,419 |                                      417 |
+| Median network |                            90 |                                        4 |
+| Quartiles      |                    38 and 188 |                                 2 and 10 |
+| Smallest       | 15 (Dongguan, Macau, Taizhou) | 1 (Dongguan, Taichung, Taizhou, Taoyuan) |
+| Largest        |                414 (Shanghai) |                             28 (Beijing) |
 
 ## Licence and citation
 
@@ -147,7 +129,6 @@ Regulation and law
 [^KoreaRailroadConstructionAct]: *Railroad Construction Act*. Republic of Korea. See Article 2(4).
 
 [^MLITYardstick]: Ministry of Land, Infrastructure, Transport and Tourism, Japan. Documentation on the yardstick assessment used in railway fare regulation.
-
 
 
 <!--For Chinese cities, Classification of Urban Rail Transit~(GB/T 44413--2024) provides the technical classification reference~\citep{GBT44413}, while the Provisions on the Operation and Management of Urban Rail Transit establish the administrative framework~\citep{MOTUrbanRail2018}. We retain qualifying lines within municipal urban rail systems and exclude services operating on national railway infrastructure. The Nanjing S-series lines are retained, with their

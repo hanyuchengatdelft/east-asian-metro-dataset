@@ -56,32 +56,23 @@ Together, these four components provide the basis for constructing both graph re
 
 The precise definitions of the graph representations and their attributes are provided in [Notation and what the files store](#notation-and-what-the-files-store) and [Definitions common to every source](#definitions-common-to-every-source).
 
+### Data sources
 
-| Data platrom | City coverage | Raw data | Missing data |
+The station, route, in-vehicle time and frequency information described above was obtained through five data collection routes. These differ in the information supplied directly and the inputs that require estimation or supplementation.
+
+*Table 1. Data sources, network coverage, available information and source-specific limitations. Numbers in parentheses indicate the number of networks.*
+
+| Data source | Network coverage | Available source data | Limitations and supplementary inputs |
 |---|---|---|---|
-| Amap subway service | 45 mainland Chinese networks, Hong Kong, Macau (47) | lines, ordered stations with coordinates and transfer flags, first and last train per station and direction | trips, timetables, headways |
-| Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto, Sapporo (4) | stops, trips, stop times, service calendar | nothing further is needed |
-| Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al.[^Vijlbrief2022a] |
-| KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
-| TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
+| Amap subway service | 45 mainland Chinese cities, Hong Kong and Macau (47) | Lines, ordered stations with coordinates and transfer flags, and first- and last-train departure times by station and direction | No individual trip timetables or headways; in-vehicle times are estimated and frequency information is obtained separately |
+| Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto and Sapporo (4) | Stops, trips, stop times and service calendars | No additional inputs required for the core network construction |
+| Operator timetables converted to GTFS, Japan | Sendai, Kobe and Fukuoka (3) | Station-level departure timetables, converted into trip and stop-time records | Kobe's station set is obtained separately from Vijlbrief et al.[^Vijlbrief2022a] |
+| KTDB national GTFS, South Korea | Seoul, Busan, Daegu and Incheon (4) | Stops, trips and stop times from the March 2023 dataset | Stations opened in 2024 and 2025 are absent, and Seoul Line 2 loop services are incompletely represented |
+| TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung and Kaohsiung (4) | Stations, station sequences by line, inter-station running and dwell times, and headway bands by service pattern and day type | No individual trip records; frequencies are derived from the supplied headway bands |
 
-Three kinds of raw material were used: GTFS feeds or timetables converted to GTFS for the Japanese and Korean networks, a JSON API for the Taiwanese networks, and the Amap subway service for the 47 networks of mainland China, Hong Kong and Macau, which is not a timetable and required its own methods. The text first states what every network must contain and the definitions all sources share, then walks through each source from raw data to the two graphs, and closes with what a reader must know before computing with the files and how far the build can be reproduced. `docs/data_dictionary.md` defines every field, `docs/frequency_sources.md` traces every frequency to its source, `docs/dataset_record.md` records the corrections applied to the published files, and `docs/network_construction_by_city.csv` holds the per-network table below as data.
+The following subsections define the common graph attributes and explain how each source was processed into L-space and P-space, including the treatment of missing or incomplete information. Network-specific details are summarised in the [per-network construction table](#per-network-construction-table), followed by guidance on [using the files](#properties-to-know-before-computing-with-the-files) and the [extent to which the construction can be reproduced](#reproducibility).
 
-### Essential inputs and data requirement
-
-Each point is explained in the subsection named in brackets.
-
-1. **Reference dates.** Network extent and station sets are those in operation on 24 September 2025, and a service statement counts only if published on or before 30 September 2025. Three cases depart from this by necessity: the Korean networks use the March 2023 national feed, Sapporo its 2020 timetable, and Kobe a 2006 station set with 2025 service attributes (Five collection routes, and the building parts).
-2. **Scope.** A network holds the route records that pass the two criteria above. Suburban and commuter railways are excluded as systems, through-running services are truncated at the boundary of the designated system, and every published network is one connected component, so the nine-station northern section of Foshan Line 3, not joined to the rest at the reference date, is absent from the files.
-3. **Stations.** One node per station, with WGS-84 coordinates. Amap stations with the same name within a city are one node, GTFS stops of one parent station or with the same name and position are one node, and Korean stops were matched to the station set by position. Three Seoul interchanges remain two unlinked nodes each, and Tokyo's near-coincident station pairs are separate stations by design (the building parts, Properties to know before computing with the files).
-4. **Route records.** A route record is one line, or one branch, short-turn section or loop direction of a line where the source lists it separately. Records are never merged by display name, and a loop line is held as two records, one per running direction (Notation and what the files store).
-5. **L-space.** A directed link joins two stations that a route record serves consecutively in that direction, and every link has its reverse. A train that passes a station without stopping does not call there (Notation and what the files store).
-6. **P-space.** A directed record joins every ordered pair of stations that one route record serves in one direction, counted once per trip where trips exist, and only where a directed L-space path on that record joins the two stations. Through services are counted within each line separately (Notation and what the files store).
-7. **In-vehicle time.** The time from departure at a station to departure at the next, so run time plus the dwell at the downstream station, with the arrival used at a terminus. On the Amap networks it is estimated from the first- and last-train progression along the line and published in whole minutes, which makes it an off-peak lower bound. On the feed-based networks it is the mean over weekday trips at second resolution, and on the Taiwanese networks the published run time plus stop time (Definitions common to every source, and the building parts).
-8. **Weekday.** The trips active on a Monday, or on Monday and Tuesday in the Korean rebuild (Building the GTFS networks).
-9. **Frequency and waiting time.** Weekday services between 05:00 and 24:00 divided by 19 hours, on every network. The waiting time is half the combined headway of all route records serving the pair, $w_{ij}=30/\sum f$. Amap gives no frequency, so the Chinese, Hong Kong and Macau frequencies are transcribed from published interval statements in a fixed order of preference, with a bounded fallback whose share is published per route (Definitions common to every source, Building the Amap networks).
-10. **Direction.** Both spaces are directed and both directions of every link and pair are stored. Combining them into one undirected value is a choice of the analysis, not a property of the files (Notation and what the files store, Properties to know before computing with the files).
-11. **Travel time.** P-space stores no in-vehicle time. The in-vehicle time of a direct pair is the shortest sum of link times along a route record serving it, and the generalised travel time of a journey adds weighted waiting time and a transfer penalty, with the weights of the accompanying paper (Travel time from the files).
+The supporting documentation provides [field definitions](docs/data_dictionary.md), [frequency sources and provenance](docs/frequency_sources.md), and a [record of corrections to the published networks](docs/dataset_record.md).
 
 ### Notation and what the files store
 
@@ -135,19 +126,6 @@ $$w_{ij} = \frac{30}{\sum_{r,\delta} f^{r,\delta}_{ij}} \text{ minutes},$$
 
 and this identity holds on every record of every P-space file. No operator publishes a waiting time. The dataset derives it.
 
-### Five collection routes
-
-Five collection routes produced the 62 networks. The platform decides how stations, in-vehicle times and frequencies are obtained, so the table is the key to the three building parts that follow.
-
-| Collection route | Networks | Gives directly | Does not give |
-|---|---|---|---|
-| Amap subway service | 45 mainland Chinese networks, Hong Kong, Macau (47) | lines, ordered stations with coordinates and transfer flags, first and last train per station and direction | trips, timetables, headways |
-| Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto, Sapporo (4) | stops, trips, stop times, service calendar | nothing further is needed |
-| Operator timetables converted to GTFS, Japan | Sendai, Kobe, Fukuoka (3) | per-station departure tables, converted to trips and stop times | Kobe's station set, taken from Vijlbrief et al.[^Vijlbrief2022a] |
-| KTDB national GTFS, South Korea | Seoul, Busan, Daegu, Incheon (4) | stops, trips, stop times (March 2023 dataset) | stations opened in 2024 and 2025, and a complete Seoul Line 2 loop |
-| TDX Rail/Metro API | Taipei, Taoyuan, Taichung, Kaohsiung (4) | stations, stations per line, station-to-station run and stop times, headway bands per service pattern and day type | trips (the API is not GTFS) |
-
-In every case the network extent is the one in operation on 24 September 2025 and service statements are admitted only if published on or before 30 September 2025 (`docs/dataset_record.md`).
 
 ### Building the Amap networks (45 mainland Chinese cities, Hong Kong and Macau)
 

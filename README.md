@@ -64,11 +64,11 @@ The station, route, in-vehicle time and frequency information described above wa
 
 | Data source | Network coverage | Available source data | Limitations and supplementary inputs |
 |---|---|---|---|
-| Amap subway service | 45 mainland Chinese cities, Hong Kong and Macau (47) | Lines, ordered stations with coordinates and transfer flags, and first- and last-train departure times by station and direction | No individual trip timetables or headways; in-vehicle times are estimated and frequency information is obtained separately |
-| Operator GTFS feeds, Japan | Tokyo (four operators), Yokohama, Kyoto and Sapporo (4) | Stops, trips, stop times and service calendars | No additional inputs required for the core network construction |
-| Operator timetables converted to GTFS, Japan | Sendai, Kobe and Fukuoka (3) | Station-level departure timetables, converted into trip and stop-time records | Kobe's station set is obtained separately from Vijlbrief et al.[^Vijlbrief2022a] |
-| KTDB national GTFS, South Korea | Seoul, Busan, Daegu and Incheon (4) | Stops, trips and stop times from the March 2023 dataset | Stations opened in 2024 and 2025 are absent, and Seoul Line 2 loop services are incompletely represented |
-| TDX Rail/Metro API, Taiwan | Taipei, Taoyuan, Taichung and Kaohsiung (4) | Stations, station sequences by line, inter-station running and dwell times, and headway bands by service pattern and day type | No individual trip records; frequencies are derived from the supplied headway bands |
+| Amap subway service[^Amap2025] | 45 mainland Chinese cities, Hong Kong and Macau (47) | Lines, ordered stations with coordinates and transfer flags, and first- and last-train departure times by station and direction | No individual trip timetables or headways; in-vehicle times are estimated and frequency information is obtained separately |
+| Operator GTFS feeds, Japan | Tokyo (four operators)[^ODPT2025], Yokohama[^Yokohama2024], Kyoto[^Kyoto2025] and Sapporo[^Sapporo2020] (4) | Stops, trips, stop times and service calendars | No additional inputs required for the core network construction |
+| Operator timetables converted to GTFS, Japan | Sendai[^Sendai2023], Kobe[^Kobe2025] and Fukuoka[^Fukuoka2025] (3) | Station-level departure timetables, converted into trip and stop-time records | Kobe's station set is obtained separately from Vijlbrief et al.[^Vijlbrief2022a] |
+| KTDB national GTFS, South Korea[^KTDB2025] | Seoul, Busan, Daegu and Incheon (4) | Stops, trips and stop times from the March 2023 dataset | Stations opened in 2024 and 2025 are absent, and Seoul Line 2 loop services are incompletely represented |
+| TDX Rail/Metro API, Taiwan[^TDX2026] | Taipei, Taoyuan, Taichung and Kaohsiung (4) | Stations, station sequences by line, inter-station running and dwell times, and headway bands by service pattern and day type | No individual trip records; frequencies are derived from the supplied headway bands |
 
 The following subsections define the common graph attributes and explain how each source was processed into L-space and P-space, including the treatment of missing or incomplete information. Network-specific details are summarised in the [per-network construction table](#per-network-construction-table), followed by guidance on [using the files](#properties-to-know-before-computing-with-the-files) and the [extent to which the construction can be reproduced](#reproducibility).
 
@@ -413,6 +413,26 @@ Data and documentation are released under Creative Commons Attribution 4.0 Inter
 [^CAMET2025]: China Association of Metros. (2026). *Statistical and analytical report on urban rail transit, 2025* (城市轨道交通2025年度统计和分析报告). https://www.camet.org.cn/xytj/tjxx/789653532090437.shtml
 
 [^Wang2026]: Wang, L., et al. (2026). CPTOND-2025: China Public Transport Operation Network Dataset. *Scientific Data, 13*, 188. https://doi.org/10.1038/s41597-025-06505-4
+
+[^Amap2025]: AutoNavi (高德地图). (2025). *Amap subway map* (地铁图) [Web service]. https://map.amap.com/subway/ (station and line listings compiled July to September 2025, re-captured August 2026).
+
+[^ODPT2025]: Public Transportation Open Data Center (公共交通オープンデータセンター). (2025). *GTFS feeds of Tokyo Metro, Toei, Yurikamome and Tokyo Monorail* [Data sets]. Association for Open Data of Public Transportation. https://www.odpt.org/ (catalogue entries https://ckan.odpt.org/dataset/train-tokyometro and https://ckan.odpt.org/dataset/train-toei, feed version 20250317 for Tokyo Metro and Toei, 20240101 for Yurikamome and Tokyo Monorail).
+
+[^Yokohama2024]: Yokohama City Transportation Bureau (横浜市交通局). (2024). *Yokohama Municipal Subway* (横浜市営地下鉄, GTFS/GTFS-JP, feed version 20241227, valid 27 December 2024 to 31 December 2025) [Data set]. Public Transportation Open Data Center. https://ckan.odpt.org/dataset/yokohama_municipal_train
+
+[^Kyoto2025]: Kyoto Municipal Transportation Bureau (京都市交通局). (2025). *Kyoto City Subway* (京都市営地下鉄, GTFS/GTFS-JP, feed version 20250701, valid 1 July 2025 to 31 March 2026) [Data set]. Public Transportation Open Data Center. https://ckan.odpt.org/dataset/kyoto_municipal_transportation_kyoto_city_subway_gtfs (the catalogue now lists the 2026 feed only, published for the period of the Public Transportation Open Data Challenge 2026).
+
+[^Sapporo2020]: Sapporo City Transportation Bureau (札幌市交通局). (2020). *Sapporo subway GTFS* (feed version 1.000, timetable valid 1 January to 31 December 2020) [Data set]. https://www.city.sapporo.jp/st/
+
+[^Sendai2023]: City of Sendai. (2023). *Sendai subway timetable data* (仙台市地下鉄時刻表データ, station timetables of 1 July 2023, CSV, CC BY 4.0) [Data set]. https://www.city.sendai.jp/joho-kikaku/shise/security/kokai/opendata_example.html
+
+[^Kobe2025]: Kobe City Transportation Bureau (神戸市交通局). (2025). *Subway open data* (地下鉄オープンデータ, station timetables, CSV, CC BY 2.1 JP) [Data set]. https://kotsu.city.kobe.lg.jp/company/overview/open-data/subway-opendata/
+
+[^Fukuoka2025]: Fukuoka City Transportation Bureau (福岡市交通局). (2025). *Subway documents and data* (地下鉄の資料・データ, all-station timetables of the Airport and Hakozaki lines and of the Nanakuma line, Excel, CC BY 2.1 JP) [Data set]. https://subway.city.fukuoka.lg.jp/subway/about/material.php. Converted to GTFS with GTFS-FukuokaCitySubway (MIT licence), https://github.com/kuwayamamasayuki/GTFS-FukuokaCitySubway
+
+[^KTDB2025]: Korea Transport Database (국가교통데이터베이스). (2025). *National public transport GTFS, March 2023 base* (2023년 3월 기준 GTFS 기반정보, released 30 May 2025) [Data set]. Ministry of Land, Infrastructure and Transport, Republic of Korea. https://www.ktdb.go.kr/www/selectBbsNttView.do?key=45&bbsNo=2&nttNo=3764
+
+[^TDX2026]: Ministry of Transportation and Communications, Taiwan. (2026). *Transport Data eXchange (TDX), Rail/Metro API* (Station, StationOfLine, S2STravelTime and Frequency resources, captured 23 and 24 August 2026). https://tdx.transportdata.tw/
 
 
 

@@ -6,6 +6,10 @@
   동아시아 지하철 데이터셋
 </p>
 
+![Map of the 62 East Asian metro networks in the dataset](docs/figures/east_asia_networks_noborders.png)
+
+*Figure 1. Location of the 62 metro networks in the dataset. Each circle marks one network at the mean coordinate of its stations, with its area proportional to the number of stations.*
+
 ## Summary
 
 This repository provides metro network data for 62 East Asian cities in two graph representations, namely the L-space and P-space[^vonFerber2009]. Both representations use stations as nodes. In L-space, a link connects two stations that are consecutive stops on at least one route. In P-space, a link connects two stations served by at least one common route, representing travel without a transfer, regardless of the number of intermediate stops.
@@ -94,7 +98,6 @@ For a route record $r$ with ordered station sequence $s_1,\dots,s_m$ in directio
 
 - A loop line, which the Amap map holds as one line, is held here as two route records, one per running direction, each with the full circle, so every ordered pair is reached both ways round (Beijing Lines 2 and 10, Chengdu Line 7, the Chongqing Loop Line, Guangzhou Line 11, Harbin Line 3, Shanghai Line 4, Xi'an Line 8, Zhengzhou Line 5). For the Tokyo Oedo Line, which its feed describes trip by trip, each ordered pair is counted once per trip and the shorter way round only.
 - A station pair is included only when a train stops at both stations, and services are truncated at the designated system boundary. In Japanese and Korean networks, cross-line pairs are included when the source lists a through service as one trip, as in Kobe. Separately listed trips are never joined, so Fukuoka’s through service at Nakasu-Kawabata appears as two rides with a transfer in the files. Amap does not provide data on cross-line through services, so these services are not represented in the dataset.
-- A train that passes a station without stopping does not count for pairs at that station. The Japanese feeds mark such calls explicitly and the build honours the mark. Through services that continue onto another line are counted within each line separately, because a timetable trip is the unit of a one-seat ride, and where an operator splits a train at a junction, as Fukuoka does at 中洲川端, pairs across the junction are absent.
 
 Both spaces are stored as directed graphs because the service they describe is directed as the two directions of a link may differ in in-vehicle time, and the two directions of a pair in frequency. The data dictionary quantifies how often they do.
 

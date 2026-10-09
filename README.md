@@ -156,7 +156,7 @@ Files are NetworkX node-link JSON. With networkx 3.4 or later use `nx.node_link_
 
 ### Building the Amap networks (45 mainland Chinese cities, Hong Kong and Macau)
 
-#### What the Amap subway service provides, and why it is not GTFS
+#### Processing of raw data from Amap
 
 A GTFS feed describes a service as a set of trips, each with a stop sequence and a departure time at every stop, valid on the days of a calendar. Every network attribute is then a count or an average over scheduled trips, which is how the Japanese, Korean and Taiwanese networks of this dataset, and the European and North American reference networks of Vijlbrief et al.[^Vijlbrief2022a][^Vijlbrief2022b], were built. No comparable feed exists for the Chinese networks. What Amap publishes for each city is an interactive subway map (`https://map.amap.com/subway/`, one map per city, addressed by the city's administrative code, 1100 for Beijing, 3100 for Shanghai, 8100 for Hong Kong, 8200 for Macau), and the information behind that map is of two kinds:
 

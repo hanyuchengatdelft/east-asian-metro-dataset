@@ -38,7 +38,7 @@ In short, **the dataset use a boder defition to include a few systems that are n
 
 ![Metro definition: what the dataset includes and excludes](docs/figures/metro_definition_venn.svg)
 
-*Figure 1. Scope of the dataset within urban rail transit. Blue areas indicate included systems while grey areas indicate exclusions.*
+*Figure 2. Scope of the dataset within urban rail transit. Blue areas indicate included systems while grey areas indicate exclusions.*
 
 The full selection procedure, including network boundaries and exclusions, is documented in the [line-level inclusion rules](docs/inclusion_rule.md).
 

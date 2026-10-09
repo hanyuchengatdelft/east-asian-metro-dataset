@@ -54,7 +54,7 @@ Regardless of the data source, constructing L-space and P-space representations 
 
 Together, these four components provide the basis for constructing both graph representations. Although in-vehicle time, frequency and waiting time are defined consistently across all 62 networks, the methods used to obtain them depend on the available source data. In the simplest case, a GTFS feed can provide all the necessary inputs. Otherwise, complete train timetables must be compiled by combining supplementary data from multiple sources.
 
-The precise definitions of the graph representations and their attributes are provided in [Notation and what the files store](#notation-and-what-the-files-store) and [Definitions common to every source](#definitions-common-to-every-source).
+The modelling assumptions shared by every source are stated in [Common modelling assumptions](#common-modelling-assumptions), and the precise definitions of the graph representations and their attributes are given in [The construction of L-space and P-space](#the-construction-of-l-space-and-p-space).
 
 ### Data sources
 
@@ -74,58 +74,82 @@ The following subsections define the common graph attributes and explain how eac
 
 The supporting documentation provides [field definitions](docs/data_dictionary.md), [frequency sources and provenance](docs/frequency_sources.md), and a [record of corrections to the published networks](docs/dataset_record.md).
 
-### Notation and what the files store
+### Common modelling assumptions
 
-The two representations are defined in the Summary above[^vonFerber2009], and the symbols follow the accompanying paper. Let $V$ be the set of stations of a network. A station $v_i \in V$ is a node with an integer `id` from 0 to $|V|-1$ in list order, a `name` as delivered by the source, and `lat`, `lon` in WGS-84 decimal degrees. Let $R$ be the route records, the rows of `data/route_information.csv` keyed by `city` and `route_id`. A route record is one line, or one branch, short-turn section or loop direction of a line where the source lists it separately, with an ordered station sequence in each direction.
+The target reference date for network extent and station coverage is 24 September 2025. Service statements are admitted only where published on or before 30 September 2025, and later statements are recorded but not applied. Where the available sources refer to a different period, the corresponding exceptions and their implications are documented in the source-specific construction subsections below.
 
-**L-space** $G_L=(V,E_L)$ is directed, with a link $(v_i,v_j)$ for every pair of stations that some route record serves consecutively in that direction, and every link has its reverse. A link carries
+Network boundaries follow the [inclusion criteria](#inclusion-criteria-and-scope) defined above. Through-running services are represented only within the boundary of the designated system. After applying the inclusion criteria, only the largest connected component of each city network is retained, excluding sections that were disconnected from the main network at the reference date.
 
-| Symbol | File field | Unit | Meaning |
-|---|---|---|---|
-| $t^{\text{in-veh}}_{ij}$ | `duration_avg` | seconds | in-vehicle time from $v_i$ to $v_j$, measured departure to departure, so run time plus the dwell at $v_j$ (Definitions common to every source, below) |
-| $R_{ij}$ | `route_I_counts` | route ids | the route records for which $(v_i,v_j)$ is a consecutive pair. The numeric values inside the dictionary are a placeholder, only the keys carry information |
-| | `d`, `n_vehicles`, `shape_id`, `headsign`, `direction_id` | | placeholders inherited from the file schema of Vijlbrief et al.[^Vijlbrief2022a] `d` equals ten times `duration_avg` and is not a length. Compute distances from the coordinates |
-| | `duration_source`, `duration_n_trips`, `v1_duration_avg` | | present on a link whose time was computed or re-timed after the 2025 compilation: how, from how many trips, and the 2025 value it replaced |
+Service calculations use weekday conditions. For GTFS-based networks, weekday trips are selected using Monday service, with Monday and Tuesday used in the Korean rebuild. Other sources use published weekday service information. Frequencies are averaged over a common window from 05:00 to 24:00, using a fixed denominator of 19 hours even where the operating span is shorter. The resulting values therefore describe average weekday service over the same observation window.
 
-**P-space** $G_P=(V,E_P)$ is directed, and it is the graph the paper writes as $G(V,E)$. A link $e_{ij}=(v_i,v_j)$ exists when a passenger can travel from $v_i$ to $v_j$ on one route record without a transfer. The files hold it as one record $(v_i,v_j,r)$ per route record $r$ that, in one of its directions, calls at $v_i$ and later at $v_j$. A record carries
+### The construction of L-space and P-space
 
-| Symbol | File field | Unit | Meaning |
-|---|---|---|---|
-| $f_{ij}^{r,\delta}$ | `veh[r][δ]` | trains per hour | weekday service frequency of route $r$ in direction $\delta\in\{0,1\}$ over the ordered pair $(v_i,v_j)$, computed over 05:00 to 24:00 (Definitions common to every source, below) |
-| $w_{ij}$ | `avg_wait` | minutes | expected waiting time at $v_i$ for a direct service to $v_j$, $w_{ij} = 30 / \sum_{r,\delta} f_{ij}^{r,\delta}$, half the combined headway |
-| | `wait_source` | | the provenance label of the frequency, followed by the URLs and dates of the statements or the feed it was read from |
-| | `edge_color`, `v1_avg_wait` | | the line colour where the source gives one, and the waiting time of the 2025 compilation where it changed |
+Both representations are built from the same two ingredients, the station set and the route records, and differ only in which station pairs they join[^vonFerber2009]. The symbols follow the accompanying paper. Let $V$ be the set of stations of a network. A station $v_i \in V$ is a node with an integer `id` from 0 to $|V|-1$ in list order, a `name` as delivered by the source, and `lat`, `lon` in WGS-84 decimal degrees. Let $R$ be the set of route records, the rows of `data/route_information.csv` keyed by `city` and `route_id`. A route record is one line, or one branch, short-turn section or loop direction of a line where the source lists it separately, with an ordered station sequence in each direction.
 
-**How P-space is derived from the route records.** For a route record $r$ with ordered station sequence $s_1,\dots,s_m$ in direction $\delta$, L-space receives the links $(s_k,s_{k+1})$ for $k<m$ and P-space receives one record for every ordered pair $(s_k,s_l)$ with $k<l$. Four rules govern the cases that a plain sequence does not cover.
+**L-space** $G_L=(V,E_L)$ is directed, with a link $(v_i,v_j)$ for every pair of stations that some route record serves consecutively in that direction, and every link has its reverse. Its service attribute is the in-vehicle time of the link. **P-space** $G_P=(V,E_P)$ is directed, and it is the graph the paper writes as $G(V,E)$. A link $e_{ij}=(v_i,v_j)$ exists when a passenger can travel from $v_i$ to $v_j$ on one route record without a transfer. The files hold it as one record $(v_i,v_j,r)$ per route record $r$ that, in one of its directions, calls at $v_i$ and later at $v_j$. Its service attributes are the frequency of each route record over the pair and the waiting time derived from their sum. In-vehicle time therefore belongs to L-space and frequency to P-space, and each attribute is defined below under the representation that stores it.
+
+#### From route records to links
+
+For a route record $r$ with ordered station sequence $s_1,\dots,s_m$ in direction $\delta$, L-space receives the links $(s_k,s_{k+1})$ for $k<m$ and P-space receives one record for every ordered pair $(s_k,s_l)$ with $k<l$. Four rules govern the cases that a plain sequence does not cover.
 
 - A loop line, which the Amap map holds as one line, is held here as two route records, one per running direction, each with the full circle, so every ordered pair is reached both ways round (Beijing Lines 2 and 10, Chengdu Line 7, the Chongqing Loop Line, Guangzhou Line 11, Harbin Line 3, Shanghai Line 4, Xi'an Line 8, Zhengzhou Line 5). For the Tokyo Oedo Line, which its feed describes trip by trip, each ordered pair is counted once per trip and the shorter way round only.
 - Branches, short-turn sections and separately listed line sections are kept as separate route records and are never merged by display name, so P-space does not acquire one-seat rides that no train offers. Shanghai Lines 5, 10 and 11, for example, hold two records each.
 - A train that passes a station without stopping does not count for pairs at that station. The Japanese feeds mark such calls explicitly and the build honours the mark. Through services that continue onto another line are counted within each line separately, because a timetable trip is the unit of a one-seat ride, and where an operator splits a train at a junction, as Fukuoka does at 中洲川端, pairs across the junction are absent.
-- A record exists only where a directed L-space path on the same route record joins the two stations. Records that failed this test in the 2025 compilation were removed (see Building the Amap networks, below).
+- A record exists only where a directed L-space path on the same route record joins the two stations. Records that failed this test in the 2025 compilation were removed ([Building the Amap networks](#building-the-amap-networks-45-mainland-chinese-cities-hong-kong-and-macau)).
 
 Both spaces are stored as directed graphs because the service they describe is directed: the two directions of a link may differ in in-vehicle time, and the two directions of a pair in frequency. The data dictionary quantifies how often they do.
 
-**Loading.** Files are NetworkX node-link JSON. With networkx 3.4 or later use `nx.node_link_graph(data, edges="links")`, with earlier versions `nx.node_link_graph(data)`. The files declare `multigraph: false`, and 32 of the 62 P-space files hold more than one record for some ordered pairs (one record per route record serving the pair). A node-link loader keeps the last record it meets. Properties to know before computing with the files, below, says how to combine them.
+#### L-space links and in-vehicle time
 
-### Definitions common to every source
+The in-vehicle time $t^{\text{in-veh}}_{ij}$ of a directed L-space link $(v_i,v_j)$ is the time between the departure of a train from $v_i$ and its departure from the next station $v_j$, in seconds. It therefore contains the running time from $v_i$ to $v_j$ and the dwell at $v_j$. At the terminus of a trip the arrival time at $v_j$ is used, because there is no departure. The convention is identical on every network. It is the quantity that enters generalised travel time, because a passenger who rides through $v_j$ spends the dwell on board. The in-vehicle time of a longer journey is the sum of the link times along the route ([Travel time from the files](#travel-time-from-the-files)).
 
-**In-vehicle time.** The in-vehicle time $t^{\text{in-veh}}_{ij}$ of a directed L-space link $(v_i,v_j)$ is the time between the departure of a train from $v_i$ and its departure from the next station $v_j$, in seconds. It therefore contains the running time from $v_i$ to $v_j$ and the dwell at $v_j$. At the terminus of a trip the arrival time at $v_j$ is used, because there is no departure. The convention is identical on every network. It is the quantity that enters generalised travel time, because a passenger who rides through $v_j$ spends the dwell on board. The in-vehicle time of a longer journey is the sum of the link times along the route (Travel time from the files, below).
+The source decides how $t^{\text{in-veh}}_{ij}$ is obtained, and the source-specific subsections below give each method in full.
 
-The platform decides how $t^{\text{in-veh}}_{ij}$ is obtained, and the building parts below give each method in full.
-
-| Platform | Networks | Links | How `duration_avg` is obtained |
+| Source | Networks | Links | How `duration_avg` is obtained |
 |---|---|---|---|
 | Amap | 47 | 13,658 | first- and last-train progression along the line, whole minutes |
 | Operator GTFS and converted timetables, Japan | 7 | 1,002 | mean over weekday trips of departure at $v_j$ minus departure at $v_i$ |
 | KTDB GTFS, Korea | 4 | 1,218 | the same, on the March 2023 feed |
 | TDX, Taiwan | 4 | 408 | run time plus stop time at $v_j$ from `S2STravelTime`, or matrix differences |
 
-**Frequency and waiting time.** The frequency $f^{r,\delta}_{ij}$ of route record $r$ in direction $\delta$ over the ordered pair $(v_i,v_j)$ is the number of weekday services of $r$ that call at $v_i$ and later at $v_j$ between 05:00 and 24:00, divided by 19 hours, in trains per hour. The 19-hour denominator is applied to every network, including those whose operators publish a shorter service span, so that the cross-network comparison stays on one convention. The waiting time is the expected wait of a passenger arriving at random, half the combined headway of all route records serving the pair,
+A link carries
+
+| Symbol | File field | Unit | Meaning |
+|---|---|---|---|
+| $t^{\text{in-veh}}_{ij}$ | `duration_avg` | seconds | in-vehicle time from $v_i$ to $v_j$, measured departure to departure, so run time plus the dwell at $v_j$ |
+| $R_{ij}$ | `route_I_counts` | route ids | the route records for which $(v_i,v_j)$ is a consecutive pair. The numeric values inside the dictionary are a placeholder, only the keys carry information |
+| | `d`, `n_vehicles`, `shape_id`, `headsign`, `direction_id` | | placeholders inherited from the file schema of Vijlbrief et al.[^Vijlbrief2022a] `d` equals ten times `duration_avg` and is not a length. Compute distances from the coordinates |
+| | `duration_source`, `duration_n_trips`, `v1_duration_avg` | | present on a link whose time was computed or re-timed after the 2025 compilation: how, from how many trips, and the 2025 value it replaced |
+
+#### P-space records, frequency and waiting time
+
+The frequency $f^{r,\delta}_{ij}$ of route record $r$ in direction $\delta$ over the ordered pair $(v_i,v_j)$ is the number of weekday services of $r$ that call at $v_i$ and later at $v_j$ within the 05:00 to 24:00 window, divided by 19 hours, in trains per hour. The window, the weekday selection and the fixed denominator are those of the common modelling assumptions above. The waiting time is the expected wait of a passenger arriving at random, half the combined headway of all route records serving the pair,
 
 $$w_{ij} = \frac{30}{\sum_{r,\delta} f^{r,\delta}_{ij}} \text{ minutes},$$
 
 and this identity holds on every record of every P-space file. No operator publishes a waiting time. The dataset derives it.
 
+As with in-vehicle time, the definition is common to every network and the source decides how the count is obtained.
+
+| Source | Networks | Records | How `veh` is obtained |
+|---|---|---|---|
+| Amap | 47 | 189,958 | published interval statements integrated over the service window of each link, carried from links to pairs as the bottleneck along the route |
+| Operator GTFS and converted timetables, Japan | 7 | 10,600 | count of the weekday trips that call at $v_i$ and later at $v_j$ |
+| KTDB GTFS, Korea | 4 | 19,576 | the same, on the March 2023 feed |
+| TDX, Taiwan | 4 | 4,388 | weekday headway bands per service pattern integrated over the window |
+
+A record carries
+
+| Symbol | File field | Unit | Meaning |
+|---|---|---|---|
+| $f_{ij}^{r,\delta}$ | `veh[r][δ]` | trains per hour | weekday service frequency of route $r$ in direction $\delta\in\{0,1\}$ over the ordered pair $(v_i,v_j)$, computed over 05:00 to 24:00 |
+| $w_{ij}$ | `avg_wait` | minutes | expected waiting time at $v_i$ for a direct service to $v_j$, $w_{ij} = 30 / \sum_{r,\delta} f_{ij}^{r,\delta}$, half the combined headway |
+| | `wait_source` | | the provenance label of the frequency, followed by the URLs and dates of the statements or the feed it was read from |
+| | `edge_color`, `v1_avg_wait` | | the line colour where the source gives one, and the waiting time of the 2025 compilation where it changed |
+
+#### Loading the files
+
+Files are NetworkX node-link JSON. With networkx 3.4 or later use `nx.node_link_graph(data, edges="links")`, with earlier versions `nx.node_link_graph(data)`. The files declare `multigraph: false`, and 32 of the 62 P-space files hold more than one record for some ordered pairs (one record per route record serving the pair). A node-link loader keeps the last record it meets. [Properties to know before computing with the files](#properties-to-know-before-computing-with-the-files) says how to combine them.
 
 ### Building the Amap networks (45 mainland Chinese cities, Hong Kong and Macau)
 
